@@ -165,3 +165,11 @@ D:\CSCI 4350\Test\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\MySqlC
 D:\CSCI 4350\Test\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\MySql.Data.EntityFrameworkCore.dll
 D:\CSCI 4350\Test\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csproj.CoreCompileInputs.cache
 D:\CSCI 4350\Test\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.MvcApplicationPartsAssemblyInfo.cache
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csprojAssemblyReference.cache
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.Manifest.cache
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.xml
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.MvcApplicationPartsAssemblyInfo.cache
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfoInputs.cache
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfo.cs
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.dll
+D:\ETSU\CSCI\Software Engineering II\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.pdb

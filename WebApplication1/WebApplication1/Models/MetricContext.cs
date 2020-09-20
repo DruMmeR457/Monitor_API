@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Models
+namespace MetricsAPI.Models
 {
-    public class TodoContext : DbContext
+    public class MetricContext : DbContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options)
+        public MetricContext(DbContextOptions<MetricContext> options)
             : base(options)
         {
         }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<SiteData> SiteData { get; set; }
     }
 }

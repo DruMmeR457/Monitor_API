@@ -11,12 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
+using MetricsAPI.Models;
 using MySql.Data.MySqlClient;
 using MySql.Data.EntityFrameworkCore.Extensions;
 
 
-namespace WebApplication1
+namespace MetricsAPI
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt =>
+            services.AddDbContext<MetricContext>(opt =>
               opt.UseMySQL(Configuration.GetConnectionString("Default")));  //login and server credentials located in appsettings.json
             //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
             services.AddControllers();

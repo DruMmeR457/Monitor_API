@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {}
+    "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\MetricsAPI.csproj": {}
   },
   "projects": {
-    "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\WebApplication1.csproj": {
+    "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\MetricsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-        "projectName": "WebApplication1",
-        "projectPath": "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\MetricsAPI.csproj",
+        "projectName": "MetricsAPI",
+        "projectPath": "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\MetricsAPI.csproj",
         "packagesPath": "C:\\Users\\Darien\\.nuget\\packages\\",
         "outputPath": "D:\\ETSU\\CSCI\\Software Engineering II\\WebApplication1\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
