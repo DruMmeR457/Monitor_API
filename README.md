@@ -1,5 +1,8 @@
 # README #
 
+If running the API in Visual Studios, go to the "Tools" tab, hover over "NuGet Package Manager", then click "Manage NuGet Packages for Solution...".
+Go to the "Browse" tab, and download "MySqlConnector", "MySql.Data", and "MySql.Data.EntityFrameworkcore". These are needed to run the program.
+
 This README would normally document whatever steps are necessary to get your application up and running.
 
 ### What is this repository for? ###
