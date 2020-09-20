@@ -6,6 +6,7 @@
 # Directories and User Files
 obj/
 bin/
+.vs/
 *.suo
 
 
