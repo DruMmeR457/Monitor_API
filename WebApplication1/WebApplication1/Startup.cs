@@ -3,7 +3,7 @@
 /// Project:        Sprint 1
 /// File Name:      Startup.cs
 /// Description:    
-///                 This program serves to start up a generic host
+///                 Contains startup class used to start API
 /// Course:         CSCI 4350 - Software Engineering
 /// Authors:        
 ///                 Darien Roach,   roachda@etsu.edu,   Developer
