@@ -44,10 +44,17 @@ namespace MetricsAPI
             Db = db;
         }
 
+        [Route("/test")]
+        public IActionResult Test()
+        {
+            return Content("Test");
+        }
+
         /// <summary>
         /// Obtains the latest result from the DB
         /// </summary>
         /// <returns>Returns latest result</returns>
+        //GET api/metrics
         [HttpGet]
         public async Task<IActionResult> GetLatest()
         {
@@ -62,7 +69,7 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="id">ID passed </param>
         /// <returns>Returns object based on passed ID</returns>
-        [HttpGet("{monitor_Id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetOne(int id)
         {
             await Db.Connection.OpenAsync();
@@ -93,7 +100,7 @@ namespace MetricsAPI
         /// <param name="id">ID for object for Put to act upon</param>
         /// <param name="body">Body object that will be put</param>
         /// <returns></returns>
-        [HttpPut("{monitor_Id}")]
+        [HttpPut("id")]
         public async Task<IActionResult> PutOne(int id, [FromBody]SiteData body)
         {
             await Db.Connection.OpenAsync();
@@ -115,7 +122,7 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="id">ID for object to delete</param>
         /// <returns>Returns status of deletion</returns>
-        [HttpDelete("{monitor_Id}")]
+        [HttpDelete("id")]
         public async Task<IActionResult> DeleteOne(int id)
         {
             await Db.Connection.OpenAsync();

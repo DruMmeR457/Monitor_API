@@ -65,8 +65,8 @@ namespace MetricsAPI
         {
             //services.AddDbContext<MetricContext>(opt =>
               //opt.UseMySQL(Configuration.GetConnectionString("Default")));  //login and server credentials located in appsettings.json
-            //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
-            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
             services.AddControllers();
         }
 

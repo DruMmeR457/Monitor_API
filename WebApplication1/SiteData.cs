@@ -78,7 +78,7 @@ namespace MetricsAPI
         public async Task UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"UPDATE 'monitoring' SET 'transactionsOverTime' = @transactionsOverTime, 'numberOfLogins' = @numberOfLogins, 'webpageSpeed' = @webpageSpeed, 'errorRate' = @errorRate, 'serviceAvailability' = @serviceAvailability WHERE 'monitor_Id' = @monitor_Id;";
+            cmd.CommandText = @"UPDATE 'monitoring' SET 'transactionsOverTime' = @transactionsOverTime, 'numberOfLogins' = @numberOfLogins, 'webpageSpeed' = @webpageSpeed, 'errorRate' = @errorRate, 'serviceAvailability' = @serviceAvailability WHERE 'monitor_ID' = @monitor_ID;";
             BindParams(cmd);
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
@@ -91,7 +91,7 @@ namespace MetricsAPI
         public async Task DeleteAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM 'monitoring' WHERE 'monitor_Id' = @monitor_Id;";
+            cmd.CommandText = @"DELETE FROM 'monitoring' WHERE 'monitor_ID' = @monitor_ID;";
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
         }
@@ -104,7 +104,7 @@ namespace MetricsAPI
         {
             cmd.Parameters.Add(new MySqlParameter
             {
-                ParameterName = "@monitor_Id",
+                ParameterName = "@monitor_ID",
                 DbType = DbType.Int32,
                 Value = Monitor_ID,
             });

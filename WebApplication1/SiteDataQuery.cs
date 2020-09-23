@@ -45,10 +45,10 @@ namespace MetricsAPI
         public async Task<SiteData> FindOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = "@SELECT 'monitor_Id', 'transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability' FROM 'monitoring' WHERE 'monitor_Id' = @monitor_Id";
+            cmd.CommandText = "@SELECT 'monitor_ID', 'transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability' FROM 'monitoring' WHERE 'monitor_ID' = @monitor_ID";
             cmd.Parameters.Add(new MySqlParameter
             {
-                ParameterName = "@monitor_Id",
+                ParameterName = "@monitor_ID",
                 DbType = DbType.Int32,
                 Value = id,
             });
@@ -63,7 +63,7 @@ namespace MetricsAPI
         public async Task<List<SiteData>> LatestPostsAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT 'monitor_Id', 'transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability' FROM 'monitoring' ORDER BY 'monitor_Id' DESC LIMIT 10;";
+            cmd.CommandText = @"SELECT 'monitor_ID', 'transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability' FROM 'monitoring' ORDER BY 'monitor_ID' DESC LIMIT 10;";
             return await RealAllAsync(await cmd.ExecuteReaderAsync());
         }
 
