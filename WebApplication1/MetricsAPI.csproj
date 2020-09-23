@@ -17,5 +17,10 @@
     <PackageReference Include="MySqlConnector" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 
 </Project>

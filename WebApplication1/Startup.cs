@@ -31,7 +31,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using MetricsAPI.Models;
 using MySql.Data.MySqlClient;
 using MySql.Data.EntityFrameworkCore.Extensions;
 
@@ -64,9 +63,10 @@ namespace MetricsAPI
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MetricContext>(opt =>
-              opt.UseMySQL(Configuration.GetConnectionString("Default")));  //login and server credentials located in appsettings.json
+            //services.AddDbContext<MetricContext>(opt =>
+              //opt.UseMySQL(Configuration.GetConnectionString("Default")));  //login and server credentials located in appsettings.json
             //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddControllers();
         }
 
