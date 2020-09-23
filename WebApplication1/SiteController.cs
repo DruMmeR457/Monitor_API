@@ -1,4 +1,25 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////
+///
+/// Project:        Sprint 1
+/// File Name:      SiteController.cs
+/// Description:    
+///                 This program serves control the site and issue commands to 
+///                 manipulate it
+/// Course:         CSCI 4350 - Software Engineering
+/// Authors:        
+///                 Darien Roach,   roachda@etsu.edu,   Developer
+///                 Grant Watson,   watsongo@etsu.edu,  Developer
+///                 Stephen Dalton, daltonsa@etsu.edu,  Developer
+///                 Kelly King,     kingkr1@etsu.edu,   Developer
+///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+///                 
+/// Created:        Monday, September 14th, 2020
+///
+//////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,14 +30,24 @@ namespace MetricsAPI
     [Route("api/[controller]")]
     public class SiteController : ControllerBase
     {
+        /// <summary>
+        /// Get Db
+        /// </summary>
         public AppDb Db { get; }
 
+        /// <summary>
+        /// Constructor with AppDb passed
+        /// </summary>
+        /// <param name="db"></param>
         public SiteController(AppDb db)
         {
             Db = db;
         }
 
-        //GET api/metrics
+        /// <summary>
+        /// Obtains the latest result from the DB
+        /// </summary>
+        /// <returns>Returns latest result</returns>
         [HttpGet]
         public async Task<IActionResult> GetLatest()
         {
@@ -26,7 +57,11 @@ namespace MetricsAPI
             return new OkObjectResult(result);
         }
 
-        //GET api/metrics/5
+        /// <summary>
+        /// Obtains one result based upon the passed ID
+        /// </summary>
+        /// <param name="id">ID passed </param>
+        /// <returns>Returns object based on passed ID</returns>
         [HttpGet("{monitor_Id}")]
         public async Task<IActionResult> GetOne(int id)
         {
@@ -38,7 +73,11 @@ namespace MetricsAPI
             return new OkObjectResult(result);
         }
 
-        //POST api/metrics
+        /// <summary>
+        /// Issues post command to API
+        /// </summary>
+        /// <param name="body">Posts body to API</param>
+        /// <returns>Returns based upon operation status</returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]SiteData body)
         {
@@ -48,7 +87,12 @@ namespace MetricsAPI
             return new OkObjectResult(body);
         }
 
-        //PUT api/metrics/5
+        /// <summary>
+        /// Issues put command for API
+        /// </summary>
+        /// <param name="id">ID for object for Put to act upon</param>
+        /// <param name="body">Body object that will be put</param>
+        /// <returns></returns>
         [HttpPut("{monitor_Id}")]
         public async Task<IActionResult> PutOne(int id, [FromBody]SiteData body)
         {
@@ -66,7 +110,11 @@ namespace MetricsAPI
             return new OkObjectResult(result);
         }
 
-        //DELETE api/metrics/5
+        /// <summary>
+        /// Deletes object based upon ID passed
+        /// </summary>
+        /// <param name="id">ID for object to delete</param>
+        /// <returns>Returns status of deletion</returns>
         [HttpDelete("{monitor_Id}")]
         public async Task<IActionResult> DeleteOne(int id)
         {
@@ -79,7 +127,10 @@ namespace MetricsAPI
             return new OkResult();
         }
 
-        //DELETE api/metrics
+        /// <summary>
+        /// Deletes everything from the database
+        /// </summary>
+        /// <returns>Returns result of deletion</returns>
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {

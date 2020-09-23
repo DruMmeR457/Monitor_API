@@ -1,4 +1,24 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////
+///
+/// Project:        Sprint 1
+/// File Name:      SiteDataQuery.cs
+/// Description:    
+///                 Used to query database
+/// Course:         CSCI 4350 - Software Engineering
+/// Authors:        
+///                 Darien Roach,   roachda@etsu.edu,   Developer
+///                 Grant Watson,   watsongo@etsu.edu,  Developer
+///                 Stephen Dalton, daltonsa@etsu.edu,  Developer
+///                 Kelly King,     kingkr1@etsu.edu,   Developer
+///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+///                 
+/// Created:        Monday, September 14th, 2020
+///
+//////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +37,11 @@ namespace MetricsAPI
             Db = db;
         }
 
+        /// <summary>
+        /// Finds one async 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Count but defaults to null</returns>
         public async Task<SiteData> FindOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
@@ -31,6 +56,10 @@ namespace MetricsAPI
             return result.Count > 0 ? result[0] : null;
         }
 
+        /// <summary>
+        /// Obtains latest Posts
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<SiteData>> LatestPostsAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
@@ -38,6 +67,10 @@ namespace MetricsAPI
             return await RealAllAsync(await cmd.ExecuteReaderAsync());
         }
 
+        /// <summary>
+        /// Deletes all async
+        /// </summary>
+        /// <returns></returns>
         public async Task DeleteAllAsync()
         {
             using var txn = await Db.Connection.BeginTransactionAsync();
@@ -47,6 +80,11 @@ namespace MetricsAPI
             await txn.CommitAsync();
         }
 
+        /// <summary>
+        /// Reads all async values
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         private async Task<List<SiteData>> RealAllAsync(DbDataReader reader)
         {
             var data = new List<SiteData>();

@@ -31,6 +31,7 @@ namespace MetricsAPI
 {
     public class SiteData
     {
+
         public int Monitor_ID { get; set; }
         public int TransactionsOverTime { get; set; }
         public int NumberOfLogins { get; set; }
@@ -40,16 +41,27 @@ namespace MetricsAPI
 
         internal AppDb Db { get; set; }
 
+        /// <summary>
+        /// Default constructor for SiteData class
+        /// </summary>
         public SiteData()
         {
 
         }
 
+        /// <summary>
+        /// Constructor with passed DB object
+        /// </summary>
+        /// <param name="db">Database</param>
         internal SiteData(AppDb db)
         {
             Db = db;
         }
 
+        /// <summary>
+        /// Inserts async into API
+        /// </summary>
+        /// <returns></returns>
         public async Task InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
@@ -59,6 +71,10 @@ namespace MetricsAPI
             Monitor_ID = (int)cmd.LastInsertedId;
         }
 
+        /// <summary>
+        /// Update async in the API
+        /// </summary>
+        /// <returns></returns>
         public async Task UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
@@ -68,6 +84,10 @@ namespace MetricsAPI
             await cmd.ExecuteNonQueryAsync();
         }
 
+        /// <summary>
+        /// Delete async in the API
+        /// </summary>
+        /// <returns></returns>
         public async Task DeleteAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
@@ -76,6 +96,10 @@ namespace MetricsAPI
             await cmd.ExecuteNonQueryAsync();
         }
 
+        /// <summary>
+        /// Binds ID
+        /// </summary>
+        /// <param name="cmd"></param>
         private void BindId(MySqlCommand cmd)
         {
             cmd.Parameters.Add(new MySqlParameter
@@ -86,6 +110,11 @@ namespace MetricsAPI
             });
         }
 
+
+        /// <summary>
+        /// Binds parameters
+        /// </summary>
+        /// <param name="cmd"></param>
         private void BindParams(MySqlCommand cmd)
         {
             cmd.Parameters.Add(new MySqlParameter
