@@ -34,6 +34,7 @@ namespace MetricsAPI
         /// Get Db
         /// </summary>
         public AppDb Db { get; }
+        public SiteData TestData { get; set; }
 
         /// <summary>
         /// Constructor with AppDb passed
@@ -42,12 +43,56 @@ namespace MetricsAPI
         public SiteController(AppDb db)
         {
             Db = db;
+            TestData = new SiteData();
+            TestData.Db = Db;
         }
 
         [Route("/test")]
         public IActionResult Test()
         {
             return Content("Test");
+        }
+
+        [Route("/addition")]
+        public async Task<IActionResult> Addition()
+        {
+            await Db.Connection.OpenAsync();
+            TestData.ErrorRate = 1;
+            TestData.NumberOfLogins = 0;
+            TestData.ServiceAvailability = 1;
+            TestData.TransactionsOverTime = 1;
+            TestData.WebpageSpeed = 1;
+            await TestData.InsertAsync();
+            return new OkObjectResult(TestData);
+        }
+
+        [Route("/update/{id}")]
+        public async Task<IActionResult> Update(int id)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new SiteDataQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            result.ErrorRate += 1;
+            result.NumberOfLogins += 1;
+            result.ServiceAvailability += 1;
+            result.TransactionsOverTime += 1;
+            result.WebpageSpeed += 1;
+            await result.UpdateAsync();
+            return new OkObjectResult(result);
+        }
+
+        [Route("/remove/{id}")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new SiteDataQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            await result.DeleteAsync();
+            return new OkResult();
         }
 
         /// <summary>
