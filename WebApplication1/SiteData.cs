@@ -65,7 +65,7 @@ namespace MetricsAPI
         public async Task InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO 'monitoring' ('transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability') VALUES (@transactionsOverTime, @numberOfLogins, @webpageSpeed, @errorRate, @serviceAvailability);";
+            cmd.CommandText = @"INSERT INTO monitoring (transactionsOverTime, numberOfLogins, webpageSpeed, errorRate, serviceAvailability) VALUES (@transactionsOverTime, @numberOfLogins, @webpageSpeed, @errorRate, @serviceAvailability);";
             BindParams(cmd);
             await cmd.ExecuteNonQueryAsync();
             Monitor_ID = (int)cmd.LastInsertedId;
@@ -78,7 +78,7 @@ namespace MetricsAPI
         public async Task UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"UPDATE 'monitoring' SET 'transactionsOverTime' = @transactionsOverTime, 'numberOfLogins' = @numberOfLogins, 'webpageSpeed' = @webpageSpeed, 'errorRate' = @errorRate, 'serviceAvailability' = @serviceAvailability WHERE 'monitor_ID' = @monitor_ID;";
+            cmd.CommandText = @"UPDATE monitoring SET transactionsOverTime = @transactionsOverTime, numberOfLogins = @numberOfLogins, webpageSpeed = @webpageSpeed, errorRate = @errorRate, serviceAvailability = @serviceAvailability WHERE 'monitor_ID' = @monitor_ID;";
             BindParams(cmd);
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
@@ -91,7 +91,7 @@ namespace MetricsAPI
         public async Task DeleteAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM 'monitoring' WHERE 'monitor_ID' = @monitor_ID;";
+            cmd.CommandText = @"DELETE FROM monitoring WHERE monitor_ID = @monitor_ID;";
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
         }
@@ -144,7 +144,7 @@ namespace MetricsAPI
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@serviceAvailability",
-                DbType = DbType.Binary,
+                DbType = DbType.Int32,
                 Value = ServiceAvailability,
             });
         }

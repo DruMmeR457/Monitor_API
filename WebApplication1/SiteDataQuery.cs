@@ -45,7 +45,7 @@ namespace MetricsAPI
         public async Task<SiteData> FindOneAsync(int id)
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = "@SELECT 'monitor_ID', 'transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability' FROM 'monitoring' WHERE 'monitor_ID' = @monitor_ID";
+            cmd.CommandText = @"SELECT monitor_ID, transactionsOverTime, numberOfLogins, webpageSpeed, errorRate, serviceAvailability FROM monitoring WHERE monitor_ID = @monitor_ID";
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@monitor_ID",
@@ -63,7 +63,7 @@ namespace MetricsAPI
         public async Task<List<SiteData>> LatestPostsAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT 'monitor_ID', 'transactionsOverTime', 'numberOfLogins', 'webpageSpeed', 'errorRate', 'serviceAvailability' FROM 'monitoring' ORDER BY 'monitor_ID' DESC LIMIT 10;";
+            cmd.CommandText = @"SELECT monitor_ID, transactionsOverTime, numberOfLogins, webpageSpeed, errorRate, serviceAvailability FROM monitoring ORDER BY monitor_ID;";
             return await RealAllAsync(await cmd.ExecuteReaderAsync());
         }
 
@@ -75,7 +75,7 @@ namespace MetricsAPI
         {
             using var txn = await Db.Connection.BeginTransactionAsync();
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM 'BlogPost'";
+            cmd.CommandText = @"DELETE FROM monitoring";
             await cmd.ExecuteNonQueryAsync();
             await txn.CommitAsync();
         }
