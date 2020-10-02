@@ -68,6 +68,7 @@ namespace MetricsAPI
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
             services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
             services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         /// <summary>
@@ -82,6 +83,16 @@ namespace MetricsAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+            //Swagger Path: localhost:5001/swagger
+            //Swagger json: localhost:5001/swagger/v1/swagger.json
 
             app.UseHttpsRedirection();
 
