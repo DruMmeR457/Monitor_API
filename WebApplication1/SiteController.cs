@@ -27,7 +27,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetricsAPI
 {
-    [Route("api/[controller]")]
+    // http://localhost:5001/api/site
+    [Route("api/site")]
     public class SiteController : ControllerBase
     {
         /// <summary>
@@ -99,7 +100,8 @@ namespace MetricsAPI
         /// Obtains the latest result from the DB
         /// </summary>
         /// <returns>Returns latest result</returns>
-        //GET api/metrics
+        /// GET
+        // Route: api/site
         [HttpGet]
         public async Task<IActionResult> GetLatest()
         {
@@ -114,6 +116,8 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="id">ID passed </param>
         /// <returns>Returns object based on passed ID</returns>
+        /// GET - Conditional
+        // Route: api/site/id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne(int id)
         {
@@ -130,6 +134,8 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="body">Posts body to API</param>
         /// <returns>Returns based upon operation status</returns>
+        /// POST
+        // Route: api/site
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]SiteData body)
         {
@@ -145,6 +151,8 @@ namespace MetricsAPI
         /// <param name="id">ID for object for Put to act upon</param>
         /// <param name="body">Body object that will be put</param>
         /// <returns></returns>
+        /// PUT - Conditional
+        // Route: api/site/id
         [HttpPut("id")]
         public async Task<IActionResult> PutOne(int id, [FromBody]SiteData body)
         {
@@ -167,6 +175,8 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="id">ID for object to delete</param>
         /// <returns>Returns status of deletion</returns>
+        /// DELETE - Conditional
+        // Route: api/site/id
         [HttpDelete("id")]
         public async Task<IActionResult> DeleteOne(int id)
         {
@@ -183,6 +193,8 @@ namespace MetricsAPI
         /// Deletes everything from the database
         /// </summary>
         /// <returns>Returns result of deletion</returns>
+        /// DELETE - All
+        // Route: api/site
         [HttpDelete]
         public async Task<IActionResult> DeleteAll()
         {
