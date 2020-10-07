@@ -117,7 +117,7 @@ namespace MetricsAPI
         /// <param name="id">ID passed </param>
         /// <returns>Returns object based on passed ID</returns>
         /// GET - Conditional
-        // Route: api/site/id
+        // Route: api/site/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne(int id)
         {
@@ -135,8 +135,8 @@ namespace MetricsAPI
         /// <param name="body">Posts body to API</param>
         /// <returns>Returns based upon operation status</returns>
         /// POST
-        // Route: api/site
-        [HttpPost]
+        // Route: api/site/post
+        [HttpPost("post")]
         public async Task<IActionResult> Post([FromBody]SiteData body)
         {
             await Db.Connection.OpenAsync();
@@ -152,8 +152,8 @@ namespace MetricsAPI
         /// <param name="body">Body object that will be put</param>
         /// <returns></returns>
         /// PUT - Conditional
-        // Route: api/site/id
-        [HttpPut("id")]
+        // Route: api/site/put/{id}
+        [HttpPut("put/{id}")]
         public async Task<IActionResult> PutOne(int id, [FromBody]SiteData body)
         {
             await Db.Connection.OpenAsync();
@@ -176,8 +176,8 @@ namespace MetricsAPI
         /// <param name="id">ID for object to delete</param>
         /// <returns>Returns status of deletion</returns>
         /// DELETE - Conditional
-        // Route: api/site/id
-        [HttpDelete("id")]
+        // Route: api/site/delete/{id}
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteOne(int id)
         {
             await Db.Connection.OpenAsync();
@@ -194,8 +194,8 @@ namespace MetricsAPI
         /// </summary>
         /// <returns>Returns result of deletion</returns>
         /// DELETE - All
-        // Route: api/site
-        [HttpDelete]
+        // Route: api/site/delete
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAll()
         {
             await Db.Connection.OpenAsync();

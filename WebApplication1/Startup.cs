@@ -33,6 +33,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using MySql.Data.EntityFrameworkCore.Extensions;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+
 
 
 namespace MetricsAPI
@@ -51,10 +54,21 @@ namespace MetricsAPI
             Configuration = configuration;
         }
 
+        //public Startup(IWebHostEnvironment env)
+        //{
+        //    var builder = new ConfigurationBuilder().
+        //                    SetBasePath(env.ContentRootPath).
+        //                    AddJsonFile("appsettings.json", false, true).
+        //                    AddEnvironmentVariables();
+        //    Configuration = builder.Build();
+        //}
+
         /// <summary>
         /// Simple get method
         /// </summary>
         public IConfiguration Configuration { get; }
+
+        //public static IContainer Container { get; private set; }
 
         /// <summary>
         /// This method gets called by the runtime. 
@@ -63,12 +77,26 @@ namespace MetricsAPI
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<MetricContext>(opt =>
-              //opt.UseMySQL(Configuration.GetConnectionString("Default")));  //login and server credentials located in appsettings.json
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
             services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
             services.AddControllers();
             services.AddSwaggerGen();
+            //services.AddMvc();
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        p => p.AllowAnyOrigin().
+            //            AllowAnyHeader().
+            //            AllowAnyMethod().
+            //            AllowCredentials()
+            //            );
+            //});
+            //var builder = new ContainerBuilder();
+
+            //builder.Populate(services);
+
+            //Container = builder.Build();
+            //return new AutofacServiceProvider(Container);
         }
 
         /// <summary>
@@ -93,6 +121,9 @@ namespace MetricsAPI
 
             //Swagger Path: localhost:5001/swagger
             //Swagger json: localhost:5001/swagger/v1/swagger.json
+
+            //app.UseCors("AllowAll");
+            //applicationLifetime.ApplicationStopped.Register(() => Container.Dispose());
 
             app.UseHttpsRedirection();
 
