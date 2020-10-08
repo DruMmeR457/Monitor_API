@@ -11,7 +11,7 @@ namespace ConsoleApp2
         {
             Console.WriteLine("Hello World!");
             var client = new HttpClient();
-            var response = await client.GetAsync("http://localhost:5001/api/site");
+            var response = await client.GetAsync("https://metricsapi20201007030533.azurewebsites.net/api/site");
             var message = await response.Content.ReadAsStringAsync();
             Console.WriteLine(message);
         }
