@@ -39,7 +39,7 @@ namespace ConsoleApp2
                         response = await client.GetAsync($"http://localhost:5001/api/site/delete/{switchAnswer}");
                         message = await response.Content.ReadAsStringAsync();
                         break;
-                    case "update":
+                    case "update":  //this switch is not done
                         response = await client.GetAsync("http://localhost:5001/api/sit/update");
                         message = await response.Content.ReadAsStringAsync();
                         break;
@@ -50,7 +50,7 @@ namespace ConsoleApp2
                 }
                 Console.WriteLine(message);
             }
-            while ((!answer.Equals("Leave", StringComparison.OrdinalIgnoreCase)));
+            while (!answer.Equals("Leave", StringComparison.OrdinalIgnoreCase));
         }
     }
 }
