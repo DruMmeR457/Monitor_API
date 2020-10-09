@@ -112,6 +112,10 @@ namespace MetricsAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+            );
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
@@ -124,6 +128,11 @@ namespace MetricsAPI
 
             //app.UseCors("AllowAll");
             //applicationLifetime.ApplicationStopped.Register(() => Container.Dispose());
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            { 
+                ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
+            });
 
             app.UseHttpsRedirection();
 
