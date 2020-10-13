@@ -42,19 +42,19 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Count but defaults to null</returns>
-        //public async Task<ErrorRateData> FindOneAsync(int id)
-        //{
-        //    using var cmd = Db.Connection.CreateCommand();
-        //    cmd.CommandText = @"SELECT Time_Stamp, ErrorCount FROM Error_Rate WHERE Time_Stamp = @Time_Stamp;";
-        //    cmd.Parameters.Add(new MySqlParameter
-        //    {
-        //        ParameterName = "@Time_Stamp",
-        //        DbType = DbType.Time,
-        //        Value = id,
-        //    });
-        //    var result = await RealAllAsync(await cmd.ExecuteReaderAsync());
-        //    return result.Count > 0 ? result[0] : null;
-        //}
+        public async Task<ErrorRateData> FindOneAsync(int id)
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"SELECT Record, Time_Stamp FROM Error_Rate WHERE Record = @Record;";
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@Record",
+                DbType = DbType.Int32,
+                Value = id,
+            });
+            var result = await ReadAllAsync(await cmd.ExecuteReaderAsync());
+            return result.Count > 0 ? result[0] : null;
+        }
 
         /// <summary>
         /// Obtains latest Posts
@@ -63,8 +63,8 @@ namespace MetricsAPI
         public async Task<List<ErrorRateData>> LatestPostsAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT Time_Stamp, ErrorCount FROM Error_Rate ORDER BY Time_Stamp;";
-            return await RealAllAsync(await cmd.ExecuteReaderAsync());
+            cmd.CommandText = @"SELECT Record, Time_Stamp FROM Error_Rate ORDER BY Record;";
+            return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
 
         /// <summary>
@@ -75,12 +75,7 @@ namespace MetricsAPI
         {
             using var txn = await Db.Connection.BeginTransactionAsync();
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DROP TABLE Error_Rate; 
-                                CREATE TABLE Error_Rate (
-                                Time_Stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                ErrorCount int,
-                                PRIMARY KEY (Time_Stamp)
-                                );";
+            cmd.CommandText = @"DELETE FROM Error_Rate";
             await cmd.ExecuteNonQueryAsync();
             await txn.CommitAsync();
         }
@@ -90,7 +85,7 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private async Task<List<ErrorRateData>> RealAllAsync(DbDataReader reader)
+        private async Task<List<ErrorRateData>> ReadAllAsync(DbDataReader reader)
         {
             var data = new List<ErrorRateData>();
             using (reader)
@@ -99,8 +94,8 @@ namespace MetricsAPI
                 {
                     var datum = new ErrorRateData(Db)
                     {
-                        Time_Stamp = reader.GetDateTime(0),
-                        ErrorCount = reader.GetInt32(1),
+                        Record = reader.GetInt32(0),
+                        Time_Stamp = reader.GetDateTime(1),
                     };
                     data.Add(datum);
                 }

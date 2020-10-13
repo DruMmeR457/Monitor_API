@@ -52,7 +52,7 @@ namespace MetricsAPI
                 DbType = DbType.Int32,
                 Value = id,
             });
-            var result = await RealAllAsync(await cmd.ExecuteReaderAsync());
+            var result = await ReadAllAsync(await cmd.ExecuteReaderAsync());
             return result.Count > 0 ? result[0] : null;
         }
 
@@ -64,7 +64,7 @@ namespace MetricsAPI
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT monitor_ID, transactionsOverTime, numberOfLogins, webpageSpeed, errorRate, serviceAvailability FROM monitoring ORDER BY monitor_ID;";
-            return await RealAllAsync(await cmd.ExecuteReaderAsync());
+            return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace MetricsAPI
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private async Task<List<SiteData>> RealAllAsync(DbDataReader reader)
+        private async Task<List<SiteData>> ReadAllAsync(DbDataReader reader)
         {
             var data = new List<SiteData>();
             using (reader)

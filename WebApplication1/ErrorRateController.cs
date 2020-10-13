@@ -118,16 +118,16 @@ namespace MetricsAPI
         /// <returns>Returns object based on passed ID</returns>
         /// GET - Conditional
         // Route: api/error/{id}
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetOne(int id)
-        //{
-        //    await Db.Connection.OpenAsync();
-        //    var query = new ErrorRateDataQuery(Db);
-        //    var result = await query.FindOneAsync(id);
-        //    if (result is null)
-        //        return new NotFoundResult();
-        //    return new OkObjectResult(result);
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOne(int id)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new ErrorRateDataQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            return new OkObjectResult(result);
+        }
 
         /// <summary>
         /// Issues post command to API
@@ -153,19 +153,18 @@ namespace MetricsAPI
         /// <returns></returns>
         /// PUT - Conditional
         // Route: api/error/put/{id}
-        //[HttpPut("put/{id}")]
-        //public async Task<IActionResult> PutOne(int id, [FromBody] ErrorRateData body)
-        //{
-        //    await Db.Connection.OpenAsync();
-        //    var query = new ErrorRateDataQuery(Db);
-        //    var result = await query.FindOneAsync(id);
-        //    if (result is null)
-        //        return new NotFoundResult();
-        //    result.Time_Stamp = body.Time_Stamp;
-        //    result.ErrorCount = body.ErrorCount;
-        //    await result.UpdateAsync();
-        //    return new OkObjectResult(result);
-        //}
+        [HttpPut("put/{id}")]
+        public async Task<IActionResult> PutOne(int id, [FromBody] ErrorRateData body)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new ErrorRateDataQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            result.Time_Stamp = body.Time_Stamp;
+            await result.UpdateAsync();
+            return new OkObjectResult(result);
+        }
 
         /// <summary>
         /// Deletes object based upon ID passed
@@ -174,17 +173,17 @@ namespace MetricsAPI
         /// <returns>Returns status of deletion</returns>
         /// DELETE - Conditional
         // Route: api/error/delete/{id}
-        //[HttpDelete("delete/{id}")]
-        //public async Task<IActionResult> DeleteOne(int id)
-        //{
-        //    await Db.Connection.OpenAsync();
-        //    var query = new ErrorRateDataQuery(Db);
-        //    var result = await query.FindOneAsync(id);
-        //    if (result is null)
-        //        return new NotFoundResult();
-        //    await result.DeleteAsync();
-        //    return new OkResult();
-        //}
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteOne(int id)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new ErrorRateDataQuery(Db);
+            var result = await query.FindOneAsync(id);
+            if (result is null)
+                return new NotFoundResult();
+            await result.DeleteAsync();
+            return new OkResult();
+        }
 
         /// <summary>
         /// Deletes everything from the database

@@ -31,9 +31,8 @@ namespace MetricsAPI
 {
     public class ErrorRateData
     {
-
+        public int Record { get; set; }
         public DateTime Time_Stamp { get; set; }
-        public int ErrorCount { get; set; }
 
         internal AppDb Db { get; set; }
 
@@ -61,10 +60,10 @@ namespace MetricsAPI
         public async Task InsertAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO Error_Rate (Time_Stamp, ErrorCount) VALUES (@Time_Stamp, @ErrorCount);";
+            cmd.CommandText = @"INSERT INTO Error_Rate (Time_Stamp) VALUES (@Time_Stamp);";
             BindParams(cmd);
             await cmd.ExecuteNonQueryAsync();
-            //Time_Stamp = (id)cmd.LastInsertedId;
+            Record = (int)cmd.LastInsertedId;
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace MetricsAPI
         public async Task UpdateAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"UPDATE Error_Rate SET Time_Stamp = @Time_Stamp, ErrorCount = @ErrorCount WHERE 'Time_Stamp' = @Time_Stamp;";
+            cmd.CommandText = @"UPDATE Error_Rate SET Time_Stamp = @Time_Stamp WHERE Record = @Record;";
             BindParams(cmd);
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
@@ -87,7 +86,7 @@ namespace MetricsAPI
         public async Task DeleteAsync()
         {
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM Error_Rate WHERE Time_Stamp = @Time_Stamp;";
+            cmd.CommandText = @"DELETE FROM Error_Rate WHERE Record = @Record;";
             BindId(cmd);
             await cmd.ExecuteNonQueryAsync();
         }
@@ -100,9 +99,9 @@ namespace MetricsAPI
         {
             cmd.Parameters.Add(new MySqlParameter
             {
-                ParameterName = "@Time_Stamp",
-                DbType = DbType.Time,
-                Value = Time_Stamp,
+                ParameterName = "@Record",
+                DbType = DbType.Int32,
+                Value = Record,
             });
         }
 
@@ -118,12 +117,6 @@ namespace MetricsAPI
                 ParameterName = "@Time_Stamp",
                 DbType = DbType.Time,
                 Value = Time_Stamp,
-            });
-            cmd.Parameters.Add(new MySqlParameter
-            {
-                ParameterName = "@ErrorCount",
-                DbType = DbType.Int32,
-                Value = ErrorCount,
             });
         }
     }
