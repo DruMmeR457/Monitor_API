@@ -1,0 +1,57 @@
+﻿@page "/AdminPanel"
+
+@inject NavigationManager NavigationManager
+
+
+<h3>AdminPanel</h3>
+
+<p>
+    <label>
+        Welcome to the Admin panel!
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="CrudCreate">Crud Create</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="CrudRead">Crud Read</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="CrudUpdate">Crud Update</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="CrudDelete">Crud Delete</button>
+
+@code {
+    private void CrudCreate()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+    private void CrudRead()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+    private void CrudUpdate()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+    private void CrudDelete()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

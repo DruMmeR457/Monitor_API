@@ -1,0 +1,36 @@
+﻿@page "/"
+
+@inject NavigationManager NavigationManager
+
+<h1>Bike Shop UI</h1>
+
+Welcome to the UI for the Software Engineering Group B User Interface
+
+<p>
+    <label>
+
+    </label>
+</p>
+
+<p>
+    <label>
+
+        Please login to begin.
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="Login">Login</button>
+
+<button class="btn btn-primary" @onclick="Create">Create Account</button>
+
+@code{
+    private void Login()
+    {
+        NavigationManager.NavigateTo("Login");
+    }
+
+    private void Create()
+    {
+        NavigationManager.NavigateTo("Create");
+    }
+}

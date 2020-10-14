@@ -1,0 +1,28 @@
+﻿@page "/Login"
+
+@inject NavigationManager NavigationManager
+
+
+<h1>Login</h1>
+
+
+<button class="btn btn-primary" @onclick="UserLogin">User Login</button>
+
+<p>
+    <label>
+
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="AdminLogin">Admin Login</button>
+
+@code {
+    private void UserLogin()
+    {
+        NavigationManager.NavigateTo("User");
+    }
+    private void AdminLogin()
+    {
+        NavigationManager.NavigateTo("Admin");
+    }
+}

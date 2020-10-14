@@ -1,0 +1,35 @@
+﻿@page "/User"
+
+@inject NavigationManager NavigationManager
+
+<h3>User</h3>
+
+<EditForm Model="@loginModel">
+    <p>
+        <label>
+            Username:
+            <InputText @bind-Value="loginModel.Input" />
+        </label>
+    </p>
+
+    <p>
+        <label>
+            Password:
+            <InputText type="password" @bind-Value="loginModel.Password" />
+        </label>
+    </p>
+    <button class="btn btn-primary" @onclick="userLog">Submit</button>
+</EditForm>
+
+
+
+
+
+@code{
+    LoginModel loginModel = new LoginModel();
+
+    private void userLog()
+    {
+        NavigationManager.NavigateTo("UserPanel");
+    }
+}
