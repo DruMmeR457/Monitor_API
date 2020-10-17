@@ -1,0 +1,46 @@
+﻿@page "/Edit"
+
+@inject NavigationManager NavigationManager
+
+
+<h3>Edit Account</h3>
+
+<p>
+    <label>
+        Edit your Account here.
+    </label>
+</p>
+
+@*This can come from copying Admin.razor formats for text inputs*@
+<p>
+    <label>
+        New Password:
+    </label>
+</p>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="Delete">Delete Account</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="Home">Homepage</button>
+
+
+@code {
+    private void Delete()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+    private void Home()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

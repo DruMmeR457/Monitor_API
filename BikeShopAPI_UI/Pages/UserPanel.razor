@@ -1,5 +1,8 @@
 ﻿@page "/UserPanel"
 
+@inject NavigationManager NavigationManager
+
+
 <h3>UserPanel</h3>
 
 <p>
@@ -8,6 +11,35 @@
     </label>
 </p>
 
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="LogOut">Log Out</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="Edit">Edit Account</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+
 @code {
+    private void LogOut()
+    {
+        NavigationManager.NavigateTo("Logout");
+    }
+
+    private void Edit()
+    {
+        NavigationManager.NavigateTo("Edit");
+    }
 
 }

@@ -1,0 +1,24 @@
+﻿@page "/Logout"
+
+@inject NavigationManager NavigationManager
+
+
+<h3>Logout</h3>
+
+<p>
+    <label>
+        You have been logged out.
+    </label>
+</p>
+
+
+<button class="btn btn-primary" @onclick="Home">Homepage</button>
+
+
+@code {
+    private void Home()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
+}

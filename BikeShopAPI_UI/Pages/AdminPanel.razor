@@ -34,6 +34,21 @@
 
 <button class="btn btn-primary" @onclick="CrudDelete">Crud Delete</button>
 
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="LogOut">Log Out</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="Edit">Edit Account</button>
+
+
 @code {
     private void CrudCreate()
     {
@@ -54,4 +69,15 @@
     {
         NavigationManager.NavigateTo("");
     }
+
+    private void LogOut()
+    {
+        NavigationManager.NavigateTo("Logout");
+    }
+
+    private void Edit()
+    {
+        NavigationManager.NavigateTo("Edit");
+    }
+
 }
