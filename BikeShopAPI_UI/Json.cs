@@ -1,44 +1,47 @@
 ﻿///////////////////////////////////////////////////////////////////////////
 ///
 /// Project:        Sprint 2
-/// File Name:      LoginModel.cs
-/// Description:    
-///                 Basic class used for text input in UI
+/// File Name:      Json.cs
+/// Description:
+///                 Class used to hold contents of json objects obtained
+///                 from API
+///                 
 /// Course:         CSCI 4350 - Software Engineering
-/// Authors:        
+/// Authors:
 ///                 Darien Roach,   roachda@etsu.edu,   Developer
 ///                 Grant Watson,   watsongo@etsu.edu,  Developer
 ///                 Kelly King,     kingkr1@etsu.edu,   Developer
 ///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
 ///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
 ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
-///                 
-/// Created:        Sunday, October 16th, 2020
+///
+/// Created:        Sunday, October 18th, 2020
 ///
 //////////////////////////////////////////////////////////////////////////
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BikeShopAPI_UI
 {
-    public class LoginModel
+    public class Json
     {
-        [Required]
-        public string Input { get; set; }
+        public int Record { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public double Speed { get; set; }
 
-        public string Description { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-
-        public LoginModel()
+        public Json()
         {
-            Description = "User Name";
+
         }
 
+        public Json(int R, DateTime DT, double S)
+        {
+            Record = R;
+            TimeStamp = DT;
+            Speed = S;
+        }
     }
 }

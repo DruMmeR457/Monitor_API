@@ -1,6 +1,27 @@
-﻿@page "/AdminPanel"
+﻿@*///////////////////////////////////////////////////////////////////////////
+///
+/// Project:        Sprint 2
+/// File Name:      AdminPanel.razor
+/// Description:
+///                 Contains contents of the admin page 
+/// Course:         CSCI 4350 - Software Engineering
+/// Authors:
+///                 Darien Roach,   roachda@etsu.edu,   Developer
+///                 Grant Watson,   watsongo@etsu.edu,  Developer
+///                 Kelly King,     kingkr1@etsu.edu,   Developer
+///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+///
+/// Created:        Sunday, October 18th, 2020
+///
+//////////////////////////////////////////////////////////////////////////*@
+
+@page "/AdminPanel"
 
 @inject NavigationManager NavigationManager
+@using System.Net.Http
+@using System.Net.Http.Json
 
 
 <h3>AdminPanel</h3>
@@ -11,28 +32,48 @@
     </label>
 </p>
 
-<button class="btn btn-primary" @onclick="CrudCreate">Crud Create</button>
+
+<button class="btn btn-primary" @onclick="getAPI">Get next metric from API</button>
 
 <p>
     <label>
     </label>
 </p>
 
-<button class="btn btn-primary" @onclick="CrudRead">Crud Read</button>
+<p>
+    <label>
+        Record:
+        <input @bind="R" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Timestamp:
+        <input @bind="DT" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Speed:
+        <input @bind="S" />
+    </label>
+</p>
 
 <p>
     <label>
     </label>
 </p>
 
-<button class="btn btn-primary" @onclick="CrudUpdate">Crud Update</button>
-
 <p>
     <label>
+        Number to delete:
+        <input @bind="deleteNum" />
     </label>
 </p>
 
-<button class="btn btn-primary" @onclick="CrudDelete">Crud Delete</button>
+<button class="btn btn-primary" @onclick="deleteAPI">Delete from API</button>
 
 <p>
     <label>
@@ -50,24 +91,45 @@
 
 
 @code {
-    private void CrudCreate()
+
+    LoginModel loginModel;
+    HttpClient client = new HttpClient();
+    Json[] json = new Json[100];
+
+    int APINum = 0;
+
+    int R;
+    DateTime DT;
+    double S;
+
+    int deleteNum;
+
+    private async void deleteAPI()
     {
-        NavigationManager.NavigateTo("");
+        var response = await client.GetAsync("http://localhost:5001/api/web");
+        response = await client.DeleteAsync("http://localhost:5001/api/web/delete/" + deleteNum);
     }
 
-    private void CrudRead()
+
+
+    private async void getAPI()
     {
-        NavigationManager.NavigateTo("");
+        var response = await client.GetAsync("http://localhost:5001/api/web");
+        json = await client.GetFromJsonAsync<Json[]>("http://localhost:5001/api/web");
+        update();
+
     }
 
-    private void CrudUpdate()
+    private void update()
     {
-        NavigationManager.NavigateTo("");
-    }
-
-    private void CrudDelete()
-    {
-        NavigationManager.NavigateTo("");
+        if (APINum >= json.Length)
+        {
+            APINum = 0;
+        }
+        R = json[APINum].Record;
+        DT = json[APINum].TimeStamp;
+        S = json[APINum].Speed;
+        APINum++;
     }
 
     private void LogOut()
