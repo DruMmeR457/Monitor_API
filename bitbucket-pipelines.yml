@@ -15,7 +15,7 @@ pipelines:
             script:
               - REPORTS_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}
               - dotnet restore BikeShopAPI_UI.sln
-              - dotnet build --no-restore --configuration Release
+              - dotnet build --no-restore --configuration Release BikeShopAPI_UI.sln
               - dotnet test --no-build --configuration Release --test-adapter-path:. --logger:"junit;LogFilePath=$REPORTS_PATH/junit.xml"
         - step:
             name: Lint the code
