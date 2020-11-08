@@ -20,6 +20,7 @@
 @page "/Logout"
 
 @inject NavigationManager NavigationManager
+@inject Service Service
 
 
 <h3>Logout</h3>
@@ -38,6 +39,7 @@
     private void Home()
     {
         NavigationManager.NavigateTo("");
+        Service.LoggedIn = false;
     }
 
 }

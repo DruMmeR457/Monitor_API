@@ -19,6 +19,7 @@
 @page "/Admin"
 
 @inject NavigationManager NavigationManager
+@inject Service Service
 
 <h3>Admin</h3>
 
@@ -49,5 +50,6 @@
     private void adminLog()
     {
         NavigationManager.NavigateTo("AdminPanel");
+        Service.LoggedIn = true;
     }
 }

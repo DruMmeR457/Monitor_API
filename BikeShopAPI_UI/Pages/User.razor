@@ -20,6 +20,7 @@
 @page "/User"
 
 @inject NavigationManager NavigationManager
+@inject Service Service 
 
 <h3>User</h3>
 
@@ -50,5 +51,6 @@
     private void userLog()
     {
         NavigationManager.NavigateTo("UserPanel");
+        Service.LoggedIn = true;
     }
 }
