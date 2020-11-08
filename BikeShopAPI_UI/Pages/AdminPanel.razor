@@ -1,21 +1,21 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
-///
-/// Project:        Sprint 2
-/// File Name:      AdminPanel.razor
-/// Description:
-///                 Contains contents of the admin page 
-/// Course:         CSCI 4350 - Software Engineering
-/// Authors:
-///                 Darien Roach,   roachda@etsu.edu,   Developer
-///                 Grant Watson,   watsongo@etsu.edu,  Developer
-///                 Kelly King,     kingkr1@etsu.edu,   Developer
-///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
-///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
-///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
-///
-/// Created:        Sunday, October 18th, 2020
-///
-//////////////////////////////////////////////////////////////////////////*@
+    ///
+    /// Project:        Sprint 2
+    /// File Name:      AdminPanel.razor
+    /// Description:
+    ///                 Contains contents of the admin page
+    /// Course:         CSCI 4350 - Software Engineering
+    /// Authors:
+    ///                 Darien Roach,   roachda@etsu.edu,   Developer
+    ///                 Grant Watson,   watsongo@etsu.edu,  Developer
+    ///                 Kelly King,     kingkr1@etsu.edu,   Developer
+    ///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+    ///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+    ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+    ///
+    /// Created:        Sunday, October 18th, 2020
+    ///
+    //////////////////////////////////////////////////////////////////////////*@
 
 @page "/AdminPanel"
 
@@ -24,7 +24,13 @@
 @using System.Net.Http.Json
 @using System.IO;
 @using System.Net;
-@using Newtonsoft.Json  
+@using Newtonsoft.Json
+@using System.Net.NetworkInformation;
+@using BikeShopAPI_UI;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
 
 
 <h3>AdminPanel</h3>
@@ -93,15 +99,19 @@
 <button class="btn btn-primary" @onclick="Edit">Edit Account</button>
 
 
-@code {
+@code 
+{
 
     LoginModel loginModel;
     HttpClient client = new HttpClient();
     Json[] json = new Json[100];
 
+    Ping myPing = new Ping();
+    PingReply reply;
 
+    string pingSpeed;
 
-    string temp;
+    string temp = "27";
 
     int APINum = 0;
 
@@ -110,6 +120,13 @@
     double S;
 
     int deleteNum;
+
+    //Change this website once hosted
+    public void getPing()
+    {
+        reply = myPing.Send("www.google.com",1000);
+        pingSpeed = reply.RoundtripTime.ToString();
+    }
 
     private async void deleteAPI()
     {
@@ -122,9 +139,30 @@
     private async void getAPI()
     {
         var response = await client.GetAsync("http://localhost:5001/api/web");
-        json= await client.GetFromJsonAsync<Json[]>("http://localhost:5001/api/web");
+        json = await client.GetFromJsonAsync<Json[]>("http://localhost:5001/api/web");
+        getPing();
+        postAPI();
 
         update();
+
+    }
+
+    private async void postAPI()
+    {
+        using (var client = new HttpClient())
+        {
+            var res = client.PostAsync("http://localhost:5001/api/web",
+                new StringContent(JsonConvert.SerializeObject(temp),
+                Encoding.UTF8, "application/json"));
+            try
+            {
+                res.Result.EnsureSuccessStatusCode();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
 
     }
 
