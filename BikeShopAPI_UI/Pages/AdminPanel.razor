@@ -151,7 +151,7 @@
     {
         using (var client = new HttpClient())
         {
-            var res = client.PostAsync("http://localhost:5001/api/web",
+            var res = client.PutAsync("http://localhost:5001/api/web",
                 new StringContent(JsonConvert.SerializeObject(temp),
                 Encoding.UTF8, "application/json"));
             try
