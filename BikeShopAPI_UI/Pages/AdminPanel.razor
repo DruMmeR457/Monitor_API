@@ -106,16 +106,16 @@
 
     private async void deleteAPI()
     {
-        var response = await client.GetAsync("http://localhost:5001/api/web");
-        response = await client.DeleteAsync("http://localhost:5001/api/web/delete/" + deleteNum);
+        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/web");
+        response = await client.DeleteAsync("https://metricsapi20201108200731.azurewebsites.net/api/web/delete/" + deleteNum);
     }
 
 
 
     private async void getAPI()
     {
-        var response = await client.GetAsync("http://localhost:5001/api/web");
-        json = await client.GetFromJsonAsync<Json[]>("http://localhost:5001/api/web");
+        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/web");
+        json = await client.GetFromJsonAsync<Json[]>("https://metricsapi20201108200731.azurewebsites.net/api/web");
         update();
 
     }
