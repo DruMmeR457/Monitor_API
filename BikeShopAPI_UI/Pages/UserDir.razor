@@ -1,9 +1,9 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
     ///
     /// Project:        Sprint 3
-    /// File Name:      UserPanel.razor
+    /// File Name:      UserDor.razor
     /// Description:
-    ///                 Contains user panel page
+    ///                 Contains directory to user pages
     /// Course:         CSCI 4350 - Software Engineering
     /// Authors:
     ///                 Darien Roach,   roachda@etsu.edu,   Developer
@@ -18,19 +18,24 @@
     ///
     //////////////////////////////////////////////////////////////////////////*@
 
-@page "/UserPanel"
-
+@page "/UserDir"
 @inject NavigationManager NavigationManager
 @inject LoginCount loginCount
 
 
-<h3>UserPanel</h3>
+<h3>UserDir</h3>
 
 <p>
     <label>
-        Welcome to the User panel!
+        Welcome to the User Directory panel!
     </label>
 </p>
+
+
+<button class="btn btn-primary" @onclick="web">Web API</button>
+<button class="btn btn-primary" @onclick="error">Error API</button>
+<button class="btn btn-primary" @onclick="trans">Transaction API</button>
+<button class="btn btn-primary" @onclick="log">Log API</button>
 
 <p>
     <label>
@@ -64,8 +69,29 @@
 </p>
 
 
-@code {
 
+
+
+@code {
+    void web()
+    {
+        NavigationManager.NavigateTo("UserPanelWeb");
+    }
+
+    void error()
+    {
+        NavigationManager.NavigateTo("UserPanelError");
+    }
+
+    void trans()
+    {
+        NavigationManager.NavigateTo("UserPanelTrans");
+    }
+
+    void log()
+    {
+        NavigationManager.NavigateTo("UserPanelLogin");
+    }
 
     private void LogOut()
     {
@@ -76,5 +102,4 @@
     {
         NavigationManager.NavigateTo("Edit");
     }
-
 }

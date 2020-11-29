@@ -1,6 +1,6 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
     ///
-    /// Project:        Sprint 2
+    /// Project:        Sprint 3
     /// File Name:      Admin.razor
     /// Description:
     ///                 Contains contents of the admin login page
@@ -14,12 +14,14 @@
     ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
     ///
     /// Created:        Sunday, October 18th, 2020
+    /// Updated:        Sunday, November 29th, 2020
     ///
     //////////////////////////////////////////////////////////////////////////*@
 @page "/Admin"
 
 @inject NavigationManager NavigationManager
 @inject Service Service
+@inject LoginCount loginCount
 
 <h3>Admin</h3>
 
@@ -49,7 +51,8 @@
 
     private void adminLog()
     {
-        NavigationManager.NavigateTo("AdminPanel");
+        NavigationManager.NavigateTo("AdminDir");
         Service.LoggedIn = true;
+        loginCount.incCount();
     }
 }

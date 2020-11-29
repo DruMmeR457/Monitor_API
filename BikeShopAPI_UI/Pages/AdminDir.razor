@@ -1,9 +1,9 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
     ///
     /// Project:        Sprint 3
-    /// File Name:      UserPanel.razor
+    /// File Name:      AdminDir.razor
     /// Description:
-    ///                 Contains user panel page
+    ///                 Contains contents of the directory page
     /// Course:         CSCI 4350 - Software Engineering
     /// Authors:
     ///                 Darien Roach,   roachda@etsu.edu,   Developer
@@ -18,63 +18,41 @@
     ///
     //////////////////////////////////////////////////////////////////////////*@
 
-@page "/UserPanel"
-
+@page "/AdminDir"
 @inject NavigationManager NavigationManager
-@inject LoginCount loginCount
 
-
-<h3>UserPanel</h3>
+<h3>AdminDir</h3>
 
 <p>
     <label>
-        Welcome to the User panel!
+        Welcome to the Admin Directory panel!
     </label>
 </p>
 
-<p>
-    <label>
-    </label>
-</p>
 
-<p>
-    <label>
-        Total number of logins:
-        <input @bind="loginCount.LogCount" />
-    </label>
-</p>
-
-<p>
-    <label>
-    </label>
-</p>
-
-<button class="btn btn-primary" @onclick="LogOut">Log Out</button>
-
-<p>
-    <label>
-    </label>
-</p>
-
-<button class="btn btn-primary" @onclick="Edit">Edit Account</button>
-
-<p>
-    <label>
-    </label>
-</p>
-
+<button class="btn btn-primary" @onclick="web">Web API</button>
+<button class="btn btn-primary" @onclick="error">Error API</button>
+<button class="btn btn-primary" @onclick="trans">Transaction API</button>
+<button class="btn btn-primary" @onclick="log">Log API</button>
 
 @code {
-
-
-    private void LogOut()
+    void web()
     {
-        NavigationManager.NavigateTo("Logout");
+        NavigationManager.NavigateTo("AdminPanelWeb");
     }
 
-    private void Edit()
+    void error()
     {
-        NavigationManager.NavigateTo("Edit");
+        NavigationManager.NavigateTo("AdminPanelError");
     }
 
+    void trans()
+    {
+        NavigationManager.NavigateTo("AdminPanelTrans");
+    }
+
+    void log()
+    {
+        NavigationManager.NavigateTo("AdminPanelLogin");
+    }
 }

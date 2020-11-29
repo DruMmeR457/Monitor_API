@@ -28,9 +28,14 @@ namespace BikeShopAPI_UI
     {
         public int LogCount { get; set; }
 
-        LoginCount()
+        public LoginCount()
         {
             LogCount = 0;
+        }
+
+        public void incCount()
+        {
+            LogCount++;
         }
     }
 }

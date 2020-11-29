@@ -1,0 +1,134 @@
+﻿@*///////////////////////////////////////////////////////////////////////////
+    ///
+    /// Project:        Sprint 3
+    /// File Name:      UserPanelError.razor
+    /// Description:
+    ///                 Contains user panel for error API page
+    /// Course:         CSCI 4350 - Software Engineering
+    /// Authors:
+    ///                 Darien Roach,   roachda@etsu.edu,   Developer
+    ///                 Grant Watson,   watsongo@etsu.edu,  Developer
+    ///                 Kelly King,     kingkr1@etsu.edu,   Developer
+    ///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+    ///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+    ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+    ///
+    /// Created:        Sunday, October 18th, 2020
+    /// Updated:        Sunday, November 29th, 2020
+    ///
+    //////////////////////////////////////////////////////////////////////////*@
+
+@page "/UserPanelError"
+
+@inject NavigationManager NavigationManager
+@using System.Net.Http
+@using System.Net.Http.Json
+
+
+<h3>AdminPanel</h3>
+
+<p>
+    <label>
+        Welcome to the User Error panel!
+    </label>
+</p>
+
+
+<button class="btn btn-primary" @onclick="getAPI">Get next metric from API</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<p>
+    <label>
+        Record:
+        <input @bind="R" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Timestamp:
+        <input @bind="DT" />
+    </label>
+</p>
+
+
+
+<p>
+    <label>
+    </label>
+</p>
+
+
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="LogOut">Log Out</button>
+
+<p>
+    <label>
+    </label>
+</p>
+
+<button class="btn btn-primary" @onclick="Edit">Edit Account</button>
+
+
+@code {
+
+    LoginModel loginModel;
+    HttpClient client = new HttpClient();
+    Json[] json = new Json[100];
+
+    int APINum = 0;
+
+    int R;
+    DateTime DT;
+    double S;
+
+    int deleteNum;
+
+    private async void deleteAPI()
+    {
+        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/error");
+        response = await client.DeleteAsync("https://metricsapi20201108200731.azurewebsites.net/api/error/delete/" + deleteNum);
+    }
+
+
+
+    private async void getAPI()
+    {
+        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/error");
+        json = await client.GetFromJsonAsync<Json[]>("https://metricsapi20201108200731.azurewebsites.net/api/error");
+        update();
+
+    }
+
+    private void update()
+    {
+        if (APINum >= json.Length)
+        {
+            APINum = 0;
+        }
+        R = json[APINum].Record;
+        DT = json[APINum].TimeStamp;
+        S = json[APINum].Speed;
+        APINum++;
+    }
+
+    private void LogOut()
+    {
+        NavigationManager.NavigateTo("Logout");
+    }
+
+    private void Edit()
+    {
+        NavigationManager.NavigateTo("Edit");
+    }
+
+}
