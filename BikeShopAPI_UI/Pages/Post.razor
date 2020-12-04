@@ -1,0 +1,24 @@
+﻿@page "/post"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject TransactionService TransService
+
+<h3>Post</h3>
+
+@if (response.IsSuccessStatusCode)
+{
+    <h2>Success!</h2>
+}
+else
+{
+    <h2>Error</h2>
+}
+
+@code {
+    HttpResponseMessage response = new HttpResponseMessage();
+    protected override async Task OnInitializedAsync()
+    {
+        response = await TransService.PostTransactionAsync();
+    }
+}

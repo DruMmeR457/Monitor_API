@@ -47,7 +47,7 @@ namespace BikeShopAPI_UI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<TransactionService>();
             services.AddSingleton<Service>();
         }
 

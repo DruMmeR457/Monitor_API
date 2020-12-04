@@ -1,13 +1,12 @@
 ﻿@page "/fetchdata"
 
 @using BikeShopAPI_UI.Data
-@inject WeatherForecastService ForecastService
+@using System.Text.Json; 
+@inject TransactionService TransService
 
-<h1>Weather forecast</h1>
+<h1>Transactions</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts == null)
+@if (transactions == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -16,20 +15,16 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Record</th>
+                <th>Time_Stamp</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var transaction in transactions)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@transaction.Record</td>
+                    <td>@transaction.Time_Stamp</td>
                 </tr>
             }
         </tbody>
@@ -37,10 +32,23 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private Transaction[] transactions;
+    private HttpResponseMessage response;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        response = await TransService.GetTransactionAsync();
+        transactions = ParseJson(await response.Content.ReadAsStringAsync());
+    }
+
+    private Transaction[] ParseJson(String response)
+    {
+  
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        return JsonSerializer.Deserialize<Transaction[]>(response, options);
     }
 }
