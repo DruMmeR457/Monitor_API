@@ -17,6 +17,7 @@ namespace BikeShopAPI_UI.Data
             var response = await client.GetAsync("http://localhost:5001/api/transaction");
             return response;
         }
+
         public async Task<HttpResponseMessage> PostTransactionAsync()
         {
             Transaction transaction = new Transaction(DateTime.Now);
@@ -25,6 +26,17 @@ namespace BikeShopAPI_UI.Data
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
             using var client = new HttpClient();
             var response = await client.PostAsync("http://localhost:5001/api/transaction/post", row);
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> PutTransactionAsync()
+        {
+            Transaction transaction = new Transaction(5, DateTime.Today);
+            var json = await Task.Run(() => JsonConvert.SerializeObject(transaction));
+
+            HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
+            using var client = new HttpClient();
+            var response = await client.PutAsync($"http://localhost:5001/api/transaction/put/{transaction.Record}", row);
             return response;
         }
     }

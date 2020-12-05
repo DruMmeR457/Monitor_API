@@ -16,5 +16,11 @@ namespace BikeShopAPI_UI.Data
         {
             this.Time_Stamp = time_Stamp;
         }
+
+        public Transaction(int record, DateTime time_Stamp)
+        {
+            this.Record = record;
+            this.Time_Stamp = time_Stamp;
+        }
     }
 }
