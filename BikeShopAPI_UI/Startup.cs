@@ -48,6 +48,7 @@ namespace BikeShopAPI_UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<TransactionService>();
+            services.AddSingleton<Error_RateService>();
             services.AddSingleton<Service>();
         }
 

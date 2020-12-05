@@ -1,0 +1,54 @@
+﻿@page "/fetch error rates"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json; 
+@inject Error_RateService ErrorService
+
+<h1>Error Rates</h1>
+
+@if (errors == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Record</th>
+                <th>Time_Stamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var error in errors)
+            {
+                <tr>
+                    <td>@error.Record</td>
+                    <td>@error.Time_Stamp</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Error_Rate[] errors;
+    private HttpResponseMessage response;
+
+    protected override async Task OnInitializedAsync()
+    {
+        response = await ErrorService.GetError_RateAsync();
+        errors = ParseJson(await response.Content.ReadAsStringAsync());
+    }
+
+    private Error_Rate[] ParseJson(String response)
+    {
+  
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        return JsonSerializer.Deserialize<Error_Rate[]>(response, options);
+    }
+}

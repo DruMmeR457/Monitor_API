@@ -1,8 +1,8 @@
-﻿@page "/post"
+﻿@page "/put error rate"
 
 @using BikeShopAPI_UI.Data
 @using System.Text.Json;
-@inject TransactionService TransService
+@inject Error_RateService ErrorService
 
 <h3>Post</h3>
 
@@ -19,6 +19,6 @@ else
     HttpResponseMessage response = new HttpResponseMessage();
     protected override async Task OnInitializedAsync()
     {
-        response = await TransService.PostTransactionAsync();
+        response = await ErrorService.PutError_RateAsync();
     }
 }
