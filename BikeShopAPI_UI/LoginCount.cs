@@ -1,11 +1,9 @@
 ﻿///////////////////////////////////////////////////////////////////////////
 ///
 /// Project:        Sprint 2
-/// File Name:      Json.cs
+/// File Name:      LoginCount.cs
 /// Description:
-///                 Class used to hold contents of json objects obtained
-///                 from API
-///                 
+///                 Contains counter class
 /// Course:         CSCI 4350 - Software Engineering
 /// Authors:
 ///                 Darien Roach,   roachda@etsu.edu,   Developer
@@ -26,32 +24,18 @@ using System.Threading.Tasks;
 
 namespace BikeShopAPI_UI
 {
-    public class Json
+    public class LoginCount
     {
-        public int Record { get; set; }
-        public DateTime TimeStamp { get; set; }
-        public double Speed { get; set; }
-        public string strName { get; set; }
-        public string strType { get; set; }
+        public int LogCount { get; set; }
 
-        public Json()
+        public LoginCount()
         {
-
+            LogCount = 0;
         }
 
-        public Json(int R, DateTime DT, double S)
+        public void incCount()
         {
-            Record = R;
-            TimeStamp = DT;
-            Speed = S;
-        }
-
-        public Json(int R, DateTime DT, string name, string type)
-        {
-            Record = R;
-            TimeStamp = DT;
-            strName = name;
-            strType = type;
+            LogCount++;
         }
     }
 }

@@ -1,24 +1,27 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
-///
-/// Project:        Sprint 2
-/// File Name:      Admin.razor
-/// Description:
-///                 Contains contents of the admin login page
-/// Course:         CSCI 4350 - Software Engineering
-/// Authors:
-///                 Darien Roach,   roachda@etsu.edu,   Developer
-///                 Grant Watson,   watsongo@etsu.edu,  Developer
-///                 Kelly King,     kingkr1@etsu.edu,   Developer
-///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
-///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
-///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
-///
-/// Created:        Sunday, October 18th, 2020
-///
-//////////////////////////////////////////////////////////////////////////*@
+    ///
+    /// Project:        Sprint 3
+    /// File Name:      Admin.razor
+    /// Description:
+    ///                 Contains contents of the admin login page
+    /// Course:         CSCI 4350 - Software Engineering
+    /// Authors:
+    ///                 Darien Roach,   roachda@etsu.edu,   Developer
+    ///                 Grant Watson,   watsongo@etsu.edu,  Developer
+    ///                 Kelly King,     kingkr1@etsu.edu,   Developer
+    ///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+    ///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+    ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+    ///
+    /// Created:        Sunday, October 18th, 2020
+    /// Updated:        Sunday, November 29th, 2020
+    ///
+    //////////////////////////////////////////////////////////////////////////*@
 @page "/Admin"
 
 @inject NavigationManager NavigationManager
+@inject Service Service
+@inject LoginCount loginCount
 
 <h3>Admin</h3>
 
@@ -48,6 +51,8 @@
 
     private void adminLog()
     {
-        NavigationManager.NavigateTo("AdminPanel");
+        NavigationManager.NavigateTo("AdminDir");
+        Service.LoggedIn = true;
+        loginCount.incCount();
     }
 }
