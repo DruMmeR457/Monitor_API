@@ -18,6 +18,13 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
+        public async Task<HttpResponseMessage> GetOneTransactionAsync(int id)
+        {
+            using var client = new HttpClient();
+            var response = await client.GetAsync($"http://localhost:5001/api/transaction/{id}");
+            return response;
+        }
+
         public async Task<HttpResponseMessage> PostTransactionAsync(DateTime timeStamp)
         {
             Transaction transaction = new Transaction(timeStamp);

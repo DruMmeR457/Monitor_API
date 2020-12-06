@@ -18,6 +18,13 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
+        public async Task<HttpResponseMessage> GetOneLoginAsync(int id)
+        {
+            using var client = new HttpClient();
+            var response = await client.GetAsync($"http://localhost:5001/api/login/{id}");
+            return response;
+        }
+
         public async Task<HttpResponseMessage> PostLoginAsync(DateTime time_Stamp, String accountName, String accountType)
         {
             Login login = new Login(time_Stamp, accountName, accountType);

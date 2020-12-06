@@ -1,0 +1,68 @@
+﻿@page "/get login"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject LoginService LIService
+
+<h1>Selected Login</h1>
+
+<p>
+    <input @bind-value="Record" @bind-value:event="onchange" />
+    <button @onclick="Get" type="button">Submit</button>
+</p>
+
+@if (login == null)
+{
+    <p><em>Enter a Record ID.</em></p>
+}
+else if (!response.IsSuccessStatusCode)
+{
+    <p><em>Please enter a valid Record ID.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Record</th>
+                <th>Time_Stamp</th>
+                <th>Account Name</th>
+                <th>Account Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@login.Record</td>
+                <td>@login.Time_Stamp</td>
+                <td>@login.AccountName</td>
+                <td>@login.AccountType</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    int Record;
+    private Login login;
+    private HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+
+    protected async Task Get()
+    {
+        response = await LIService.GetOneLoginAsync(Record);
+        if (response.IsSuccessStatusCode)
+        {
+            login = ParseJson(await response.Content.ReadAsStringAsync());
+        }
+    }
+
+    private Login ParseJson(String response)
+    {
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        return JsonSerializer.Deserialize<Login>(response, options);
+    }
+}

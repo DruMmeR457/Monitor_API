@@ -18,6 +18,13 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
+        public async Task<HttpResponseMessage> GetOneError_RateAsync(int id)
+        {
+            using var client = new HttpClient();
+            var response = await client.GetAsync($"http://localhost:5001/api/error/{id}");
+            return response;
+        }
+
         public async Task<HttpResponseMessage> PostError_RateAsync(DateTime time_Stamp)
         {
             Error_Rate error = new Error_Rate(time_Stamp);
