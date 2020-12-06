@@ -1,0 +1,64 @@
+﻿@page "/get error rate"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject Error_RateService ErrorService
+
+<p>
+    <input @bind-value="Record" @bind-value:event="onchange" />
+    <button @onclick="Get" type="button">Submit</button>
+</p>
+
+@if (error == null)
+{
+    <p><em>Enter a Record ID.</em></p>
+}
+else if (!response.IsSuccessStatusCode)
+{
+    <p><em>Please enter a valid Record ID.</em></p>
+}
+else
+{
+    <h1>Selected Error</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Record</th>
+                <th>Time_Stamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@error.Record</td>
+                <td>@error.Time_Stamp</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    int Record;
+    private Error_Rate error;
+    private HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+
+    protected async Task Get()
+    {
+        response = await ErrorService.GetOneError_RateAsync(Record);
+        if (response.IsSuccessStatusCode)
+        {
+            error = ParseJson(await response.Content.ReadAsStringAsync());
+        }
+    }
+
+    private Error_Rate ParseJson(String response)
+    {
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        return JsonSerializer.Deserialize<Error_Rate>(response, options);
+    }
+}

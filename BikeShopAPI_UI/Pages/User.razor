@@ -21,8 +21,12 @@
 @page "/User"
 
 @inject NavigationManager NavigationManager
+<<<<<<< HEAD
 @inject Service Service
 @inject LoginCount loginCount
+=======
+@inject Service Service 
+>>>>>>> origin/feature/userinterface
 
 <h3>User</h3>
 
@@ -53,8 +57,13 @@
 
     private void userLog()
     {
+<<<<<<< HEAD
         NavigationManager.NavigateTo("UserDir");
         Service.LoggedIn = true;
         loginCount.incCount();
+=======
+        NavigationManager.NavigateTo("UserPanel");
+        Service.LoggedIn = true;
+>>>>>>> origin/feature/userinterface
     }
 }

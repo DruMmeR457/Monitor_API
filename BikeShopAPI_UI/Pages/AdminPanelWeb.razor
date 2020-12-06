@@ -1,9 +1,16 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
     ///
+<<<<<<< HEAD:BikeShopAPI_UI/Pages/AdminPanelWeb.razor
     /// Project:        Sprint 3
     /// File Name:      AdminPanelWeb.razor
     /// Description:
     ///                 Contains contents of the admin web page
+=======
+    /// Project:        Sprint 2
+    /// File Name:      AdminPanel.razor
+    /// Description:
+    ///                 Contains contents of the admin page
+>>>>>>> origin/feature/userinterface:BikeShopAPI_UI/Pages/AdminPanel.razor
     /// Course:         CSCI 4350 - Software Engineering
     /// Authors:
     ///                 Darien Roach,   roachda@etsu.edu,   Developer
@@ -14,15 +21,31 @@
     ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
     ///
     /// Created:        Sunday, October 18th, 2020
+<<<<<<< HEAD:BikeShopAPI_UI/Pages/AdminPanelWeb.razor
     /// Updated:        Sunday, November 29th, 2020
     ///
     //////////////////////////////////////////////////////////////////////////*@
 
 @page "/AdminPanelWeb"
+=======
+    ///
+    //////////////////////////////////////////////////////////////////////////*@
+
+@page "/AdminPanel"
+>>>>>>> origin/feature/userinterface:BikeShopAPI_UI/Pages/AdminPanel.razor
 
 @inject NavigationManager NavigationManager
 @using System.Net.Http
 @using System.Net.Http.Json
+@using System.IO;
+@using System.Net;
+@using Newtonsoft.Json
+@using System.Net.NetworkInformation;
+@using BikeShopAPI_UI;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
 
 
 <h3>Admin Panel</h3>
@@ -91,11 +114,19 @@
 <button class="btn btn-primary" @onclick="Edit">Edit Account</button>
 
 
-@code {
+@code 
+{
 
     LoginModel loginModel;
     HttpClient client = new HttpClient();
     Json[] json = new Json[100];
+
+    Ping myPing = new Ping();
+    PingReply reply;
+
+    string pingSpeed;
+
+    string temp = "27";
 
     int APINum = 0;
 
@@ -104,6 +135,13 @@
     double S;
 
     int deleteNum;
+
+    //Change this website once hosted
+    public void getPing()
+    {
+        reply = myPing.Send("www.google.com",1000);
+        pingSpeed = reply.RoundtripTime.ToString();
+    }
 
     private async void deleteAPI()
     {
@@ -115,9 +153,36 @@
 
     private async void getAPI()
     {
+<<<<<<< HEAD:BikeShopAPI_UI/Pages/AdminPanelWeb.razor
         var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/web");
         json = await client.GetFromJsonAsync<Json[]>("https://metricsapi20201108200731.azurewebsites.net/api/web");
+=======
+        var response = await client.GetAsync("http://localhost:5001/api/web");
+        json = await client.GetFromJsonAsync<Json[]>("http://localhost:5001/api/web");
+        getPing();
+        postAPI();
+
+>>>>>>> origin/feature/userinterface:BikeShopAPI_UI/Pages/AdminPanel.razor
         update();
+
+    }
+
+    private async void postAPI()
+    {
+        using (var client = new HttpClient())
+        {
+            var res = client.PutAsync("http://localhost:5001/api/web",
+                new StringContent(JsonConvert.SerializeObject(temp),
+                Encoding.UTF8, "application/json"));
+            try
+            {
+                res.Result.EnsureSuccessStatusCode();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
 
     }
 

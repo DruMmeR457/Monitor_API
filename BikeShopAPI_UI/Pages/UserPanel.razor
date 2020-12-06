@@ -1,6 +1,10 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
     ///
+<<<<<<< HEAD
     /// Project:        Sprint 3
+=======
+    /// Project:        Sprint 2
+>>>>>>> origin/feature/userinterface
     /// File Name:      UserPanel.razor
     /// Description:
     ///                 Contains user panel page
@@ -14,15 +18,23 @@
     ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
     ///
     /// Created:        Sunday, October 18th, 2020
+<<<<<<< HEAD
     /// Updated:        Sunday, November 29th, 2020
+=======
+>>>>>>> origin/feature/userinterface
     ///
     //////////////////////////////////////////////////////////////////////////*@
 
 @page "/UserPanel"
 
 @inject NavigationManager NavigationManager
+<<<<<<< HEAD
 @inject LoginCount loginCount
 
+=======
+@using Blazorise
+@using Blazorise.Charts
+>>>>>>> origin/feature/userinterface
 
 <h3>User Panel</h3>
 
@@ -37,6 +49,7 @@
     </label>
 </p>
 
+<<<<<<< HEAD
 <p>
     <label>
         Total number of logins:
@@ -48,6 +61,9 @@
     <label>
     </label>
 </p>
+=======
+
+>>>>>>> origin/feature/userinterface
 
 <button class="btn btn-primary" @onclick="LogOut">Log Out</button>
 
@@ -67,6 +83,12 @@
 @code {
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> origin/feature/userinterface
     private void LogOut()
     {
         NavigationManager.NavigateTo("Logout");
