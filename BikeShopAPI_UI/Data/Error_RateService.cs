@@ -18,9 +18,9 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
-        public async Task<HttpResponseMessage> PostError_RateAsync()
+        public async Task<HttpResponseMessage> PostError_RateAsync(DateTime time_Stamp)
         {
-            Error_Rate error = new Error_Rate(DateTime.Now);
+            Error_Rate error = new Error_Rate(time_Stamp);
             var json = await Task.Run(() => JsonConvert.SerializeObject(error));
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
@@ -29,9 +29,9 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
-        public async Task<HttpResponseMessage> PutError_RateAsync()
+        public async Task<HttpResponseMessage> PutError_RateAsync(int record, DateTime time_Stamp)
         {
-            Error_Rate error = new Error_Rate(5, DateTime.Today);
+            Error_Rate error = new Error_Rate(record, time_Stamp);
             var json = await Task.Run(() => JsonConvert.SerializeObject(error));
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");

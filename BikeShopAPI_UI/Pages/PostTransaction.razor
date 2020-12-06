@@ -6,19 +6,16 @@
 
 <h3>Post</h3>
 
-@if (response.IsSuccessStatusCode)
-{
-    <h2>Success!</h2>
-}
-else
-{
-    <h2>Error</h2>
-}
+<p>
+    <input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+    <button @onclick="Post" type="button">Submit</button>
+</p>
 
 @code {
+    DateTime Time_Stamp = DateTime.Today;
     HttpResponseMessage response = new HttpResponseMessage();
-    protected override async Task OnInitializedAsync()
+    protected async Task Post()
     {
-        response = await TransService.PostTransactionAsync();
+        response = await TransService.PostTransactionAsync(Time_Stamp);
     }
 }

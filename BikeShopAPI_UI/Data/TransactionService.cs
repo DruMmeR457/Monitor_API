@@ -18,9 +18,9 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
-        public async Task<HttpResponseMessage> PostTransactionAsync()
+        public async Task<HttpResponseMessage> PostTransactionAsync(DateTime timeStamp)
         {
-            Transaction transaction = new Transaction(DateTime.Now);
+            Transaction transaction = new Transaction(timeStamp);
             var json = await Task.Run(() => JsonConvert.SerializeObject(transaction));
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
@@ -29,9 +29,9 @@ namespace BikeShopAPI_UI.Data
             return response;
         }
 
-        public async Task<HttpResponseMessage> PutTransactionAsync()
+        public async Task<HttpResponseMessage> PutTransactionAsync(int record, DateTime time_Stamp)
         {
-            Transaction transaction = new Transaction(5, DateTime.Today);
+            Transaction transaction = new Transaction(record, time_Stamp);
             var json = await Task.Run(() => JsonConvert.SerializeObject(transaction));
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
