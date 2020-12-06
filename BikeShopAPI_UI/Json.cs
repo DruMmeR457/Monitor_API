@@ -31,6 +31,8 @@ namespace BikeShopAPI_UI
         public int Record { get; set; }
         public DateTime TimeStamp { get; set; }
         public double Speed { get; set; }
+        public string strName { get; set; }
+        public string strType { get; set; }
 
         public Json()
         {
@@ -42,6 +44,14 @@ namespace BikeShopAPI_UI
             Record = R;
             TimeStamp = DT;
             Speed = S;
+        }
+
+        public Json(int R, DateTime DT, string name, string type)
+        {
+            Record = R;
+            TimeStamp = DT;
+            strName = name;
+            strType = type;
         }
     }
 }

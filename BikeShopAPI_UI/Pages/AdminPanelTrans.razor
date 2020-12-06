@@ -1,34 +1,35 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
-///
-/// Project:        Sprint 2
-/// File Name:      AdminPanel.razor
-/// Description:
-///                 Contains contents of the admin page 
-/// Course:         CSCI 4350 - Software Engineering
-/// Authors:
-///                 Darien Roach,   roachda@etsu.edu,   Developer
-///                 Grant Watson,   watsongo@etsu.edu,  Developer
-///                 Kelly King,     kingkr1@etsu.edu,   Developer
-///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
-///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
-///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
-///
-/// Created:        Sunday, October 18th, 2020
-///
-//////////////////////////////////////////////////////////////////////////*@
+    ///
+    /// Project:        Sprint 3
+    /// File Name:      AdminPanelTrans.razor
+    /// Description:
+    ///                 Contains contents of the admin transaction page
+    /// Course:         CSCI 4350 - Software Engineering
+    /// Authors:
+    ///                 Darien Roach,   roachda@etsu.edu,   Developer
+    ///                 Grant Watson,   watsongo@etsu.edu,  Developer
+    ///                 Kelly King,     kingkr1@etsu.edu,   Developer
+    ///                 Jackson Brooks, brooksjt@etsu.edu,  Developer
+    ///                 Nick Ehrhart,   ehrhart@etsu.edu,   Product Owner
+    ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
+    ///
+    /// Created:        Sunday, October 18th, 2020
+    /// Updated:        Sunday, November 29th, 2020
+    ///
+    //////////////////////////////////////////////////////////////////////////*@
 
-@page "/AdminPanel"
+@page "/AdminPanelTrans"
 
 @inject NavigationManager NavigationManager
 @using System.Net.Http
 @using System.Net.Http.Json
 
 
-<h3>AdminPanel</h3>
+<h3>Admin Panel</h3>
 
 <p>
     <label>
-        Welcome to the Admin panel!
+        Welcome to the Admin Transaction panel!
     </label>
 </p>
 
@@ -54,12 +55,6 @@
     </label>
 </p>
 
-<p>
-    <label>
-        Speed:
-        <input @bind="S" />
-    </label>
-</p>
 
 <p>
     <label>
@@ -106,16 +101,16 @@
 
     private async void deleteAPI()
     {
-        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/web");
-        response = await client.DeleteAsync("https://metricsapi20201108200731.azurewebsites.net/api/web/delete/" + deleteNum);
+        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/transaction");
+        response = await client.DeleteAsync("https://metricsapi20201108200731.azurewebsites.net/api/transaction/delete/" + deleteNum);
     }
 
 
 
     private async void getAPI()
     {
-        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/web");
-        json = await client.GetFromJsonAsync<Json[]>("https://metricsapi20201108200731.azurewebsites.net/api/web");
+        var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/transaction");
+        json = await client.GetFromJsonAsync<Json[]>("https://metricsapi20201108200731.azurewebsites.net/transaction/web");
         update();
 
     }
