@@ -14,14 +14,14 @@ namespace BikeShopAPI_UI.Data
         public async Task<HttpResponseMessage> GetTransactionAsync()
         {
             using var client = new HttpClient();
-            var response = await client.GetAsync("http://localhost:5001/api/transaction");
+            var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/transaction");
             return response;
         }
 
         public async Task<HttpResponseMessage> GetOneTransactionAsync(int id)
         {
             using var client = new HttpClient();
-            var response = await client.GetAsync($"http://localhost:5001/api/transaction/{id}");
+            var response = await client.GetAsync($"https://metricsapi20201108200731.azurewebsites.net/api/transaction/{id}");
             return response;
         }
 
@@ -32,7 +32,7 @@ namespace BikeShopAPI_UI.Data
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
             using var client = new HttpClient();
-            var response = await client.PostAsync("http://localhost:5001/api/transaction/post", row);
+            var response = await client.PostAsync("https://metricsapi20201108200731.azurewebsites.net/api/transaction/post", row);
             return response;
         }
 
@@ -43,7 +43,7 @@ namespace BikeShopAPI_UI.Data
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
             using var client = new HttpClient();
-            var response = await client.PutAsync($"http://localhost:5001/api/transaction/put/{transaction.Record}", row);
+            var response = await client.PutAsync($"https://metricsapi20201108200731.azurewebsites.net/api/transaction/put/{transaction.Record}", row);
             return response;
         }
     }

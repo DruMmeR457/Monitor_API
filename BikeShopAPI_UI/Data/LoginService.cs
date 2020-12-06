@@ -14,14 +14,14 @@ namespace BikeShopAPI_UI.Data
         public async Task<HttpResponseMessage> GetLoginAsync()
         {
             using var client = new HttpClient();
-            var response = await client.GetAsync("http://localhost:5001/api/login");
+            var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/login");
             return response;
         }
 
         public async Task<HttpResponseMessage> GetOneLoginAsync(int id)
         {
             using var client = new HttpClient();
-            var response = await client.GetAsync($"http://localhost:5001/api/login/{id}");
+            var response = await client.GetAsync($"https://metricsapi20201108200731.azurewebsites.net/api/login/{id}");
             return response;
         }
 
@@ -32,7 +32,7 @@ namespace BikeShopAPI_UI.Data
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
             using var client = new HttpClient();
-            var response = await client.PostAsync("http://localhost:5001/api/login/post", row);
+            var response = await client.PostAsync("https://metricsapi20201108200731.azurewebsites.net/api/login/post", row);
             return response;
         }
 
@@ -43,7 +43,7 @@ namespace BikeShopAPI_UI.Data
 
             HttpContent row = new StringContent(json, Encoding.UTF8, "application/json");
             using var client = new HttpClient();
-            var response = await client.PutAsync($"http://localhost:5001/api/login/put/{login.Record}", row);
+            var response = await client.PutAsync($"https://metricsapi20201108200731.azurewebsites.net/api/login/put/{login.Record}", row);
             return response;
         }
     }
