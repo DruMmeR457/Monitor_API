@@ -48,54 +48,6 @@ namespace MetricsAPI
             TestData.Db = Db;
         }
 
-        //[Route("/test")]
-        //public IActionResult Test()
-        //{
-        //return Content("Test");
-        //}
-
-        //[Route("/addition")]
-        //public async Task<IActionResult> Addition()
-        //{
-        //    await Db.Connection.OpenAsync();
-        //    TestData.Web = 1;
-        //    TestData.NumberOfLogins = 0;
-        //    TestData.ServiceAvailability = 1;
-        //    TestData.TransactionsOverTime = 1;
-        //    TestData.WebpageSpeed = 1;
-        //    await TestData.InsertAsync();
-        //    return new OkObjectResult(TestData);
-        //}
-
-        //[Route("/update/{id}")]
-        //public async Task<IActionResult> Update(int id)
-        //{
-        //    await Db.Connection.OpenAsync();
-        //    var query = new SiteDataQuery(Db);
-        //    var result = await query.FindOneAsync(id);
-        //    if (result is null)
-        //        return new NotFoundResult();
-        //    result.Web += 1;
-        //    result.NumberOfLogins += 1;
-        //    result.ServiceAvailability += 1;
-        //    result.TransactionsOverTime += 1;
-        //    result.WebpageSpeed += 1;
-        //    await result.UpdateAsync();
-        //    return new OkObjectResult(result);
-        //}
-
-        //[Route("/remove/{id}")]
-        //public async Task<IActionResult> Remove(int id)
-        //{
-        //    await Db.Connection.OpenAsync();
-        //    var query = new SiteDataQuery(Db);
-        //    var result = await query.FindOneAsync(id);
-        //    if (result is null)
-        //        return new NotFoundResult();
-        //    await result.DeleteAsync();
-        //    return new OkResult();
-        //}
-
         /// <summary>
         /// Obtains the latest result from the DB
         /// </summary>
@@ -125,7 +77,7 @@ namespace MetricsAPI
             var query = new WebDataQuery(Db);
             var result = await query.FindOneAsync(id);
             if (result is null)
-                return new NotFoundResult();
+                return new NotFoundResult(); //404 Error
             return new OkObjectResult(result);
         }
 
@@ -160,7 +112,7 @@ namespace MetricsAPI
             var query = new WebDataQuery(Db);
             var result = await query.FindOneAsync(id);
             if (result is null)
-                return new NotFoundResult();
+                return new NotFoundResult(); //404 Error
             result.Time_Stamp = body.Time_Stamp;
             result.Speed = body.Speed;
             await result.UpdateAsync();
@@ -181,7 +133,7 @@ namespace MetricsAPI
             var query = new WebDataQuery(Db);
             var result = await query.FindOneAsync(id);
             if (result is null)
-                return new NotFoundResult();
+                return new NotFoundResult(); //404 Error
             await result.DeleteAsync();
             return new OkResult();
         }
@@ -198,6 +150,7 @@ namespace MetricsAPI
             await Db.Connection.OpenAsync();
             var query = new WebDataQuery(Db);
             await query.DeleteAllAsync();
+            await query.ResetAuto();
             return new OkResult();
         }
     }

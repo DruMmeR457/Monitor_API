@@ -36,7 +36,7 @@ namespace MetricsAPI
         /// <param name="connectionString"></param>
         public AppDb (string connectionString)
         {
-            Connection = new MySqlConnection(connectionString);
+            Connection = new MySqlConnection(connectionString); //Establishes the initial connect
         }
 
         public void Dispose() => Connection.Dispose();

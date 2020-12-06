@@ -71,13 +71,25 @@ namespace MetricsAPI
         /// Deletes all async
         /// </summary>
         /// <returns></returns>
-        public async Task DeleteAllAsync()  //work in progress
+        public async Task DeleteAllAsync()
         {
             using var txn = await Db.Connection.BeginTransactionAsync();
             using var cmd = Db.Connection.CreateCommand();
+            cmd.Transaction = txn;
             cmd.CommandText = @"DELETE FROM Transaction;";
             await cmd.ExecuteNonQueryAsync();
             await txn.CommitAsync();
+        }
+
+        /// <summary>
+        /// Resets the auto-incrementation to 1
+        /// </summary>
+        /// <returns></returns>
+        public async Task ResetAuto()
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"ALTER TABLE Transaction AUTO_INCREMENT =1;";
+            await cmd.ExecuteNonQueryAsync();
         }
 
         /// <summary>

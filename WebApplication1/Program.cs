@@ -35,7 +35,6 @@ namespace MetricsAPI
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            //CreateWebHostBuilder(args).Run();
         }
 
         /// <summary>
@@ -51,14 +50,5 @@ namespace MetricsAPI
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-
-        //public static IWebHost CreateWebHostBuilder(string[] args)
-        //{
-        //    return WebHost.CreateDefaultBuilder(args)
-        //        .UseUrls("http://localhost:5001")
-        //        .UseKestrel()
-        //        .UseIISIntegration()
-        //        .UseStartup<Startup>().Build();
-        //}
     }
 }

@@ -54,21 +54,10 @@ namespace MetricsAPI
             Configuration = configuration;
         }
 
-        //public Startup(IWebHostEnvironment env)
-        //{
-        //    var builder = new ConfigurationBuilder().
-        //                    SetBasePath(env.ContentRootPath).
-        //                    AddJsonFile("appsettings.json", false, true).
-        //                    AddEnvironmentVariables();
-        //    Configuration = builder.Build();
-        //}
-
         /// <summary>
         /// Simple get method
         /// </summary>
         public IConfiguration Configuration { get; }
-
-        //public static IContainer Container { get; private set; }
 
         /// <summary>
         /// This method gets called by the runtime. 
@@ -81,22 +70,6 @@ namespace MetricsAPI
             services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
             services.AddControllers();
             services.AddSwaggerGen();
-            //services.AddMvc();
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowAll",
-            //        p => p.AllowAnyOrigin().
-            //            AllowAnyHeader().
-            //            AllowAnyMethod().
-            //            AllowCredentials()
-            //            );
-            //});
-            //var builder = new ContainerBuilder();
-
-            //builder.Populate(services);
-
-            //Container = builder.Build();
-            //return new AutofacServiceProvider(Container);
         }
 
         /// <summary>
@@ -122,12 +95,6 @@ namespace MetricsAPI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-
-            //Swagger Path: localhost:5001/swagger
-            //Swagger json: localhost:5001/swagger/v1/swagger.json
-
-            //app.UseCors("AllowAll");
-            //applicationLifetime.ApplicationStopped.Register(() => Container.Dispose());
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             { 
