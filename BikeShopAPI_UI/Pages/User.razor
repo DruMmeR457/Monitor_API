@@ -21,12 +21,8 @@
 @page "/User"
 
 @inject NavigationManager NavigationManager
-<<<<<<< HEAD
 @inject Service Service
 @inject LoginCount loginCount
-=======
-@inject Service Service 
->>>>>>> origin/feature/userinterface
 
 <h3>User</h3>
 
@@ -34,14 +30,14 @@
     <p>
         <label>
             Username:
-            <InputText @bind-Value="loginModel.Input" />
+            <@InputText @bind-Value="@loginModel.Input" />
         </label>
     </p>
 
     <p>
         <label>
             Password:
-            <InputText type="password" @bind-Value="loginModel.Password" />
+            <@InputText type="password" @bind-Value="@loginModel.Password" />
         </label>
     </p>
     <button class="btn btn-primary" @onclick="userLog">Submit</button>
@@ -57,13 +53,8 @@
 
     private void userLog()
     {
-<<<<<<< HEAD
         NavigationManager.NavigateTo("UserDir");
         Service.LoggedIn = true;
         loginCount.incCount();
-=======
-        NavigationManager.NavigateTo("UserPanel");
-        Service.LoggedIn = true;
->>>>>>> origin/feature/userinterface
     }
 }

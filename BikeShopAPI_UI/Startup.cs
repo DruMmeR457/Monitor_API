@@ -47,16 +47,13 @@ namespace BikeShopAPI_UI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-<<<<<<< HEAD
-            services.AddSingleton<WeatherForecastService>();
+            //services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<Service>();
             services.AddSingleton<LoginCount>();
-=======
             services.AddSingleton<TransactionService>();
             services.AddSingleton<Error_RateService>();
             services.AddSingleton<LoginService>();
             services.AddSingleton<Service>();
->>>>>>> origin/feature/userinterface
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

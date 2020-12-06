@@ -21,10 +21,7 @@
 
 @inject NavigationManager NavigationManager
 @inject Service Service
-<<<<<<< HEAD
 @inject LoginCount loginCount
-=======
->>>>>>> origin/feature/userinterface
 
 <h3>Admin</h3>
 
@@ -54,13 +51,8 @@
 
     private void adminLog()
     {
-<<<<<<< HEAD
         NavigationManager.NavigateTo("AdminDir");
         Service.LoggedIn = true;
         loginCount.incCount();
-=======
-        NavigationManager.NavigateTo("AdminPanel");
-        Service.LoggedIn = true;
->>>>>>> origin/feature/userinterface
     }
 }

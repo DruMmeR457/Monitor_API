@@ -1,16 +1,9 @@
 ﻿@*///////////////////////////////////////////////////////////////////////////
     ///
-<<<<<<< HEAD:BikeShopAPI_UI/Pages/AdminPanelWeb.razor
     /// Project:        Sprint 3
     /// File Name:      AdminPanelWeb.razor
     /// Description:
     ///                 Contains contents of the admin web page
-=======
-    /// Project:        Sprint 2
-    /// File Name:      AdminPanel.razor
-    /// Description:
-    ///                 Contains contents of the admin page
->>>>>>> origin/feature/userinterface:BikeShopAPI_UI/Pages/AdminPanel.razor
     /// Course:         CSCI 4350 - Software Engineering
     /// Authors:
     ///                 Darien Roach,   roachda@etsu.edu,   Developer
@@ -21,18 +14,11 @@
     ///                 Anna Cade,      cadea1@etsu.edu,    Scrum Master
     ///
     /// Created:        Sunday, October 18th, 2020
-<<<<<<< HEAD:BikeShopAPI_UI/Pages/AdminPanelWeb.razor
     /// Updated:        Sunday, November 29th, 2020
     ///
     //////////////////////////////////////////////////////////////////////////*@
 
 @page "/AdminPanelWeb"
-=======
-    ///
-    //////////////////////////////////////////////////////////////////////////*@
-
-@page "/AdminPanel"
->>>>>>> origin/feature/userinterface:BikeShopAPI_UI/Pages/AdminPanel.razor
 
 @inject NavigationManager NavigationManager
 @using System.Net.Http
@@ -153,16 +139,8 @@
 
     private async void getAPI()
     {
-<<<<<<< HEAD:BikeShopAPI_UI/Pages/AdminPanelWeb.razor
         var response = await client.GetAsync("https://metricsapi20201108200731.azurewebsites.net/api/web");
         json = await client.GetFromJsonAsync<Json[]>("https://metricsapi20201108200731.azurewebsites.net/api/web");
-=======
-        var response = await client.GetAsync("http://localhost:5001/api/web");
-        json = await client.GetFromJsonAsync<Json[]>("http://localhost:5001/api/web");
-        getPing();
-        postAPI();
-
->>>>>>> origin/feature/userinterface:BikeShopAPI_UI/Pages/AdminPanel.razor
         update();
 
     }
