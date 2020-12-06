@@ -4,16 +4,23 @@
 @using System.Text.Json;
 @inject TransactionService TransService
 
-<h3>Post</h3>
+<h3>Post Transaction</h3>
 
-<p>
-    <input @bind-value="Time_Stamp" @bind-value:event="onchange" />
-    <button @onclick="Post" type="button">Submit</button>
-</p>
+<input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+<button @onclick="Post" type="button">Submit</button>
+<p>Format: "mm/dd/yyyy HH:mm:ss tt"</p>
+@if (response.IsSuccessStatusCode)
+{
+    <h1>Success!</h1>
+}
+else
+{
+    <h1>Enter a DateTime</h1>
+}
 
 @code {
     DateTime Time_Stamp = DateTime.Today;
-    HttpResponseMessage response = new HttpResponseMessage();
+    HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
     protected async Task Post()
     {
         response = await TransService.PostTransactionAsync(Time_Stamp);

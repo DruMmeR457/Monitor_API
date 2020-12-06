@@ -4,8 +4,6 @@
 @using System.Text.Json;
 @inject TransactionService TransService
 
-<h1>Selected Transaction</h1>
-
 <p>
     <input @bind-value="Record" @bind-value:event="onchange" />
     <button @onclick="Get" type="button">Submit</button>
@@ -21,6 +19,8 @@ else if (!response.IsSuccessStatusCode)
 }
 else
 {
+    <h1>Selected Transaction</h1>
+
     <table class="table">
         <thead>
             <tr>

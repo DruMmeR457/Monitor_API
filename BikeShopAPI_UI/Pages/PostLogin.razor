@@ -4,17 +4,28 @@
 @using System.Text.Json;
 @inject LoginService LIService
 
-<h3>Post</h3>
+<h3>Post Login</h3>
 
-<p>
-    <input @bind-value="Time_Stamp" @bind-value:event="onchange" />
-    <button @onclick="Post" type="button">Submit</button>
-</p>
+<input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+<p>Format: "mm/dd/yyyy HH:mm:ss tt"</p>
+<input @bind-value="AccountName" @bind-value:event="onchange" />
+<p>Account Name</p>
+<input @bind-value="AccountType" @bind-value:event="onchange" />
+<p>Account Type</p>
+<button @onclick="Post" type="button">Submit</button>
+@if (response.IsSuccessStatusCode)
+{
+    <h1>Success!</h1>
+}
+else
+{
+    <h1>Enter a DateTime, Account Name, Account Type</h1>
+}
 
 @code {
     String AccountName = "defaultName", AccountType = "defaultType";
     DateTime Time_Stamp = DateTime.Today;
-    HttpResponseMessage response = new HttpResponseMessage();
+    HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
     protected async Task Post()
     {
         response = await LIService.PostLoginAsync(Time_Stamp, AccountName, AccountType);

@@ -4,26 +4,34 @@
 @using System.Text.Json;
 @inject LoginService LIService
 
-<h3>Put</h3>
+<h3>Put Login</h3>
 
-<p>
-    <input @bind-value="Time_Stamp" @bind-value:event="onchange" />
-    <input @bind-value="Record" @bind-value:event="onchange" />
-</p>
-<p>
-    <input @bind-value="AccountName" @bind-value:event="onchange" />
-    <input @bind-value="AccountType" @bind-value:event="onchange" />
-</p>
-
-<p>
-    <button @onclick="Put" type="button">Submit</button>
-</p>
-
+<input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+<p>Format: "mm/dd/yyyy HH:mm:ss tt"</p>
+<input @bind-value="Record" @bind-value:event="onchange" />
+<p>Record ID</p>
+<input @bind-value="AccountName" @bind-value:event="onchange" />
+<p>Account Name</p>
+<input @bind-value="AccountType" @bind-value:event="onchange" />
+<p>Account Type</p>
+<button @onclick="Put" type="button">Submit</button>
+@if (response.IsSuccessStatusCode)
+{
+    <h1>Success!</h1>
+}
+else if (response.StatusCode != System.Net.HttpStatusCode.Unauthorized)
+{
+    <p>Please enter a valid Record ID.</p>
+}
+else
+{
+    <h1>Enter a Record ID, DateTime, Account Name, And Account Type</h1>
+}
 @code {
     String AccountName = "defaultName", AccountType = "defaultType";
     DateTime Time_Stamp = DateTime.Today;
     int Record;
-    HttpResponseMessage response = new HttpResponseMessage();
+    HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
     protected async Task Put()
     {
         response = await LIService.PutLoginAsync(Record, Time_Stamp, AccountName, AccountType);
