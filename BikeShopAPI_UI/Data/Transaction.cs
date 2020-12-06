@@ -1,13 +1,10 @@
-using Microsoft.AspNetCore.Components;
 using System;
 
 namespace BikeShopAPI_UI.Data
 {
     public class Transaction
     {
-        [Parameter]
         public int Record { get; set; }
-        [Parameter]
         public DateTime Time_Stamp { get; set; }
 
         public Transaction()

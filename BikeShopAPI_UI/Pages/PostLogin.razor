@@ -1,0 +1,22 @@
+﻿@page "/post login"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject LoginService LIService
+
+<h3>Post</h3>
+
+<p>
+    <input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+    <button @onclick="Post" type="button">Submit</button>
+</p>
+
+@code {
+    String AccountName = "defaultName", AccountType = "defaultType";
+    DateTime Time_Stamp = DateTime.Today;
+    HttpResponseMessage response = new HttpResponseMessage();
+    protected async Task Post()
+    {
+        response = await LIService.PostLoginAsync(Time_Stamp, AccountName, AccountType);
+    }
+}

@@ -1,0 +1,31 @@
+﻿@page "/put login"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject LoginService LIService
+
+<h3>Put</h3>
+
+<p>
+    <input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+    <input @bind-value="Record" @bind-value:event="onchange" />
+</p>
+<p>
+    <input @bind-value="AccountName" @bind-value:event="onchange" />
+    <input @bind-value="AccountType" @bind-value:event="onchange" />
+</p>
+
+<p>
+    <button @onclick="Put" type="button">Submit</button>
+</p>
+
+@code {
+    String AccountName = "defaultName", AccountType = "defaultType";
+    DateTime Time_Stamp = DateTime.Today;
+    int Record;
+    HttpResponseMessage response = new HttpResponseMessage();
+    protected async Task Put()
+    {
+        response = await LIService.PutLoginAsync(Record, Time_Stamp, AccountName, AccountType);
+    }
+}
