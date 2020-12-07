@@ -53,6 +53,7 @@ namespace BikeShopAPI_UI
             services.AddSingleton<TransactionService>();
             services.AddSingleton<Error_RateService>();
             services.AddSingleton<LoginService>();
+            services.AddSingleton<WebSpeedService>();
             services.AddSingleton<Service>();
         }
 
