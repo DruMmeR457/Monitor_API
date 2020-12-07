@@ -1,11 +1,12 @@
 ﻿
 @inject NavigationManager NavigationManager
+@page "/LoginUserDir"
 
 <h3>LoginUserDir</h3>
 
 
-    <button class="btn btn-primary" @onclick="fetch">Get All</button>
-    <button class="btn btn-primary" @onclick="Get">Get One</button>
+<button class="btn btn-primary" @onclick="fetch">Get All</button>
+<button class="btn btn-primary" @onclick="Get">Get One</button>
 
 @code {
     void fetch()
@@ -17,5 +18,5 @@
     {
         NavigationManager.NavigateTo("get transaction");
     }
-    }
 }
+
