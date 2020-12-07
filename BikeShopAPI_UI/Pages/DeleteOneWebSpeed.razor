@@ -1,0 +1,32 @@
+﻿@page "/delete one web speed"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject WebSpeedService SpeedService
+
+<input @bind-value="Record" @bind-value:event="onchange" />
+<button @onclick="DeleteOne" type="button">Delete</button>
+
+@if (response.IsSuccessStatusCode)
+{
+    <p><em>Successfully Deleted!</em></p>
+}
+else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+{
+    <p><em>Error</em></p>
+}
+else
+{
+    <p>Click to truncate table</p>
+}
+
+@code {
+    int Record;
+    private Transaction transaction;
+    private HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
+
+    protected async Task DeleteOne()
+    {
+        response = await SpeedService.DeleteOneWebSpeedAsync(Record);
+    }
+}

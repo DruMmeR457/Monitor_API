@@ -30,14 +30,14 @@
     <p>
         <label>
             Username:
-            <@InputText @bind-Value="@loginModel.Input" />
+            <InputText @bind-Value="@loginModel.Input" />
         </label>
     </p>
 
     <p>
         <label>
             Password:
-            <@InputText type="password" @bind-Value="@loginModel.Password" />
+            <InputText type="password" @bind-Value="@loginModel.Password" />
         </label>
     </p>
     <button class="btn btn-primary" @onclick="userLog">Submit</button>

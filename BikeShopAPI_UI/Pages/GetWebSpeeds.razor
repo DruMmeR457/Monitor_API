@@ -1,0 +1,66 @@
+﻿@page "/get web speed"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject WebSpeedService SpeedService
+
+<p>
+    <input @bind-value="Record" @bind-value:event="onchange" />
+    <button @onclick="Get" type="button">Submit</button>
+</p>
+
+@if (speed == null)
+{
+    <p><em>Enter a Record ID.</em></p>
+}
+else if (!response.IsSuccessStatusCode)
+{
+    <p><em>Please enter a valid Record ID.</em></p>
+}
+else
+{
+    <h1>Selected Transaction</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Record</th>
+                <th>Time_Stamp</th>
+                <th>Web Speed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@speed.Record</td>
+                <td>@speed.Time_Stamp</td>
+                <td>@speed.Speed</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    int Record;
+    private BikeShopAPI_UI.Data.WebSpeed speed;
+    private HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+
+    protected async Task Get()
+    {
+        response = await SpeedService.GetOneWebSpeedAsync(Record);
+        if (response.IsSuccessStatusCode)
+        {
+            speed = ParseJson(await response.Content.ReadAsStringAsync());
+        }
+    }
+
+    private WebSpeed ParseJson(String response)
+    {
+
+        JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        return JsonSerializer.Deserialize<WebSpeed>(response, options);
+    }
+}

@@ -1,0 +1,31 @@
+﻿@page "/post web speed"
+
+@using BikeShopAPI_UI.Data
+@using System.Text.Json;
+@inject WebSpeedService SpeedService
+
+<h3>Post Web Speed</h3>
+
+<input @bind-value="Time_Stamp" @bind-value:event="onchange" />
+<p>Format: "mm/dd/yyyy HH:mm:ss tt"</p>
+<input @bind-value="Speed" @bind-value:event="onchange" />
+<p>Web Speed</p>
+<button @onclick="Post" type="button">Submit</button>
+@if (response.IsSuccessStatusCode)
+{
+    <h1>Success!</h1>
+}
+else
+{
+    <h1>Enter a DateTime and Web Speed</h1>
+}
+
+@code {
+    double Speed;
+    DateTime Time_Stamp = DateTime.Today;
+    HttpResponseMessage response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+    protected async Task Post()
+    {
+        response = await SpeedService.PostWebSpeedAsync(Time_Stamp, Speed);
+    }
+}
