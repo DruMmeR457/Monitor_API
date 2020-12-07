@@ -46,5 +46,19 @@ namespace BikeShopAPI_UI.Data
             var response = await client.PutAsync($"https://metricsapi20201108200731.azurewebsites.net/api/login/put/{login.Record}", row);
             return response;
         }
+
+        public async Task<HttpResponseMessage> DeleteOneLoginAsync(int id)
+        {
+            using var client = new HttpClient();
+            var response = await client.DeleteAsync($"https://metricsapi20201108200731.azurewebsites.net/api/login/delete/{id}");
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> DeleteAllLoginAsync()
+        {
+            using var client = new HttpClient();
+            var response = await client.DeleteAsync("https://metricsapi20201108200731.azurewebsites.net/api/login/delete");
+            return response;
+        }
     }
 }
