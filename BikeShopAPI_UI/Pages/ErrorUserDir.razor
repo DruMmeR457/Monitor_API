@@ -1,20 +1,21 @@
 ﻿<h3>ErrorUserDir</h3>
+@page "/ErrorUserDir"
 
 @inject NavigationManager NavigationManager
 
 
-    <button class="btn btn-primary" @onclick="fetch">Get All</button>
-    <button class="btn btn-primary" @onclick="Get">Get One</button>
+<button class="btn btn-primary" @onclick="fetch">Get All</button>
+<button class="btn btn-primary" @onclick="Get">Get One</button>
 
 @code {
     void fetch()
-        {
-            NavigationManager.NavigateTo("fetch transactions");
-        }
+    {
+        NavigationManager.NavigateTo("fetch transactions");
+    }
 
-        void Get()
-        {
-            NavigationManager.NavigateTo("get transaction");
-        }
+    void Get()
+    {
+        NavigationManager.NavigateTo("get transaction");
     }
 }
+
