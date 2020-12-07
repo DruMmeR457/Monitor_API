@@ -1,0 +1,43 @@
+﻿@page "/TransDir"
+@inject NavigationManager NavigationManager
+
+<h3>Transaction Directory</h3>
+
+<button class="btn btn-primary" @onclick="fetch">Get All</button>
+<button class="btn btn-primary" @onclick="Del">Delete</button>
+<button class="btn btn-primary" @onclick="DelAll">Delete All</button>
+<button class="btn btn-primary" @onclick="Post">Post</button>
+<button class="btn btn-primary" @onclick="Get">Get One</button>
+<button class="btn btn-primary" @onclick="Put">Put</button>
+
+@code {
+    void fetch()
+    {
+        NavigationManager.NavigateTo("fetch transactions");
+    }
+
+    void Del()
+    {
+        NavigationManager.NavigateTo("delete one transaction");
+    }
+
+    void Post()
+    {
+        NavigationManager.NavigateTo("post transaction");
+    }
+
+    void DelAll()
+    {
+        NavigationManager.NavigateTo("delete all transactions");
+    }
+
+    void Get()
+    {
+        NavigationManager.NavigateTo("get transaction");
+    }
+
+    void Put()
+    {
+        NavigationManager.NavigateTo("put transaction");
+    }
+}
