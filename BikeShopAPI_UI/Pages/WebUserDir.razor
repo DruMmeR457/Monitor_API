@@ -1,0 +1,33 @@
+﻿@inject NavigationManager NavigationManager
+
+<h3>WebUserDir</h3>
+
+<button class="btn btn-primary" @onclick="fetch">Get All</button>
+<button class="btn btn-primary" @onclick="Get">Get One</button>
+
+@code {
+    void fetch()
+    {
+        NavigationManager.NavigateTo("fetch web speeds");
+    }
+
+    void Del()
+    {
+        NavigationManager.NavigateTo("delete one web speed");
+    }
+
+    void Post()
+    {
+        NavigationManager.NavigateTo("post web speed");
+    }
+
+    void DelAll()
+    {
+        NavigationManager.NavigateTo("delete all web speeds");
+    }
+
+    void Get()
+    {
+        NavigationManager.NavigateTo("get web speed");
+    }
+}
