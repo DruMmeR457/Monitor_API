@@ -1,0 +1,21 @@
+﻿
+@inject NavigationManager NavigationManager
+
+<h3>LoginUserDir</h3>
+
+
+    <button class="btn btn-primary" @onclick="fetch">Get All</button>
+    <button class="btn btn-primary" @onclick="Get">Get One</button>
+
+@code {
+    void fetch()
+    {
+        NavigationManager.NavigateTo("fetch transactions");
+    }
+
+    void Get()
+    {
+        NavigationManager.NavigateTo("get transaction");
+    }
+    }
+}

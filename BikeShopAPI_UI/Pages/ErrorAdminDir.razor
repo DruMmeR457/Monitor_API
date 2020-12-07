@@ -1,0 +1,43 @@
+﻿@page "/ErrorDir"
+@inject NavigationManager NavigationManager
+
+<h3>Error Directory</h3>
+
+<button class="btn btn-primary" @onclick="fetch">Get All</button>
+<button class="btn btn-primary" @onclick="Del">Delete</button>
+<button class="btn btn-primary" @onclick="DelAll">Delete All</button>
+<button class="btn btn-primary" @onclick="Post">Post</button>
+<button class="btn btn-primary" @onclick="Get">Get One</button>
+<button class="btn btn-primary" @onclick="Put">Put</button>
+
+@code {
+    void fetch()
+    {
+        NavigationManager.NavigateTo("fetch error rates");
+    }
+
+    void Del()
+    {
+        NavigationManager.NavigateTo("delete one error");
+    }
+
+    void Post()
+    {
+        NavigationManager.NavigateTo("post error rate");
+    }
+
+    void DelAll()
+    {
+        NavigationManager.NavigateTo("delete all errors");
+    }
+
+    void Get()
+    {
+        NavigationManager.NavigateTo("get error rate");
+    }
+
+    void Put()
+    {
+        NavigationManager.NavigateTo("put error rate");
+    }
+}

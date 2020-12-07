@@ -1,0 +1,43 @@
+﻿@page "/LoginDir"
+@inject NavigationManager NavigationManager
+
+<h3>Login Directory</h3>
+
+<button class="btn btn-primary" @onclick="fetch">Get All</button>
+<button class="btn btn-primary" @onclick="Del">Delete</button>
+<button class="btn btn-primary" @onclick="DelAll">Delete All</button>
+<button class="btn btn-primary" @onclick="Post">Post</button>
+<button class="btn btn-primary" @onclick="Get">Get One</button>
+<button class="btn btn-primary" @onclick="Put">Put</button>
+
+@code {
+    void fetch()
+    {
+        NavigationManager.NavigateTo("fetch logins");
+    }
+
+    void Del()
+    {
+        NavigationManager.NavigateTo("delete one login");
+    }
+
+    void Post()
+    {
+        NavigationManager.NavigateTo("post login");
+    }
+
+    void DelAll()
+    {
+        NavigationManager.NavigateTo("delete all logins");
+    }
+
+    void Get()
+    {
+        NavigationManager.NavigateTo("get login");
+    }
+
+    void Put()
+    {
+        NavigationManager.NavigateTo("put login");
+    }
+}
